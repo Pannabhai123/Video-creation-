@@ -20,6 +20,15 @@ APIs, no stock subscriptions, no data leaving the machine.
 
 ## Quick start
 
+**At the start of a new chat, run this first** — it recreates the Python
+environment (~15 s) and verifies the whole workspace:
+
+```bash
+bash /home/user/Video-creation-/youtube_workspace/bootstrap.sh --test
+```
+
+Then:
+
 ```bash
 PY=/home/user/Video-creation-/.venv/bin/python
 cd /home/user/Video-creation-/youtube_workspace

@@ -12,16 +12,23 @@ The environment is ready and verified. Start here:
 - **Production workflow** → [`youtube_workspace/documentation/WORKFLOW.md`](youtube_workspace/documentation/WORKFLOW.md)
 - **New session / resume** → [`youtube_workspace/documentation/RESUME.md`](youtube_workspace/documentation/RESUME.md)
 
-## 60-second start
+## Start of every chat — one command
 
 ```bash
-python3 -m venv /home/user/Video-creation-/.venv
-/home/user/Video-creation-/.venv/bin/pip install -r youtube_workspace/requirements.txt
+bash /home/user/Video-creation-/youtube_workspace/bootstrap.sh
+```
 
+The workspace code, templates, fonts and docs persist in git. The Python
+environment (`.venv`) does **not** survive a new sandbox, so this script recreates
+it and verifies everything in ~15 seconds. Add `--test` to also run the pipeline
+tests.
+
+Then:
+
+```bash
 cd /home/user/Video-creation-/youtube_workspace
 PY=/home/user/Video-creation-/.venv/bin/python
 
-$PY automation/check_env.py        # verify everything
 $PY automation/newproject.py --id my_first_video --type book_summary --title "मेरी पहली वीडियो"
 $PY automation/projector.py build projects/my_first_video/project.json --draft
 ```

@@ -12,15 +12,15 @@
       "gain_db": -26
     }
   },
-  "built_at": "2026-10-26T01:46:51",
-  "preset": "longform_1080p30",
+  "built_at": "2026-10-26T06:31:35",
+  "preset": "draft_720p",
   "resolution": [
-    1920,
-    1080
+    1280,
+    720
   ],
   "fps": 30,
   "duration_seconds": 79.75,
-  "output": "/home/user/Video-creation-/youtube_workspace/rendered_videos/demo_productivity.mp4",
+  "output": "/home/user/Video-creation-/youtube_workspace/rendered_videos/demo_productivity_draft.mp4",
   "picture": "/home/user/Video-creation-/youtube_workspace/projects/demo_productivity/render/picture.mp4",
   "audio_info": {
     "narration_present": false,
@@ -184,5 +184,5 @@
       "audio": null
     }
   ],
-  "elapsed_seconds": 203.9
+  "elapsed_seconds": 68.5
 }

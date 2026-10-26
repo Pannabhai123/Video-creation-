@@ -4,6 +4,24 @@ Arena re-attaches this repository to the conversation branch, so the workspace
 usually comes back as it was. The venv and generated renders may not. Follow this
 in order — it takes under a minute, and it tells you exactly what state you are in.
 
+## 0. The one command (usually all you need)
+
+```bash
+cd /home/user/Video-creation-
+git fetch origin arena/9679f9cd-video-creation
+git reset --hard origin/arena/9679f9cd-video-creation   # skip if you have local work
+bash youtube_workspace/bootstrap.sh --test
+```
+
+`bootstrap.sh` recreates `.venv`, installs from `requirements.txt`, rebuilds any
+missing folders, then runs `check_env.py --strict` and the 16 pipeline tests.
+Takes ~20 s. Steps 1–3 below are the manual equivalent — use them only if the
+script itself fails.
+
+Why this is needed: in a new sandbox the **files** survive (git + snapshot) but the
+**Python environment does not**. Observed on 26 Oct 2026 — details and proof in
+`documentation/PERSISTENCE.md`.
+
 ## 1. Confirm the workspace is here
 
 ```bash

@@ -9,6 +9,7 @@ PY=/home/user/Video-creation-/.venv/bin/python
 
 | Module | One-line purpose |
 |---|---|
+| `bootstrap.sh` | rebuild venv + folders + verify, in one command |
 | `automation/check_env.py` | verify the environment is intact |
 | `automation/newproject.py` | scaffold a new video project from a template |
 | `automation/hinditext.py` | correct Devanagari text → PNG (HarfBuzz + FreeType) |
@@ -23,6 +24,15 @@ PY=/home/user/Video-creation-/.venv/bin/python
 | `automation/seo.py` | titles, description, chapters, tags, Shorts ideas |
 
 ---
+
+## bootstrap.sh
+
+```bash
+bash youtube_workspace/bootstrap.sh          # venv + packages + folders + verify
+bash youtube_workspace/bootstrap.sh --test   # also run the 16 pipeline tests
+bash youtube_workspace/bootstrap.sh --force  # delete and recreate the venv
+```
+Idempotent and safe to run every session; it skips work that is already done.
 
 ## check_env.py
 
