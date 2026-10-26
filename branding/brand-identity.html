@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAARVAAN — Brand Identity Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Mukta:wght@400;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1D2A;
+    --navy-2:#081620;
+    --gold:#C9A24A;
+    --gold-lt:#E3C77E;
+    --ivory:#F6F1E7;
+    --teal:#14514B;
+    --copper:#B4622D;
+    --grey:#8A94A0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--navy-2);
+    color:var(--ivory);
+    font-family:'Inter','Mukta',system-ui,sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+  /* HERO */
+  .hero{
+    background:
+      radial-gradient(900px 420px at 15% 0%, rgba(201,162,74,.16), transparent 60%),
+      radial-gradient(700px 500px at 90% 20%, rgba(20,81,75,.55), transparent 65%),
+      linear-gradient(160deg, #0B1D2A 0%, #081620 70%);
+    border-bottom:1px solid rgba(201,162,74,.25);
+    padding:76px 0 64px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"सा";
+    position:absolute;right:-40px;top:-70px;
+    font-family:'Mukta',sans-serif;font-weight:800;
+    font-size:400px;line-height:1;color:rgba(246,241,231,.035);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-size:11px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin-bottom:26px;
+  }
+  .lockup{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+  .mark{flex:0 0 auto}
+  h1{
+    font-family:'Poppins',sans-serif;font-weight:600;
+    font-size:clamp(42px,7vw,76px);line-height:1;
+    letter-spacing:.13em;color:var(--ivory);
+  }
+  .deva{
+    font-family:'Mukta',sans-serif;font-weight:700;
+    font-size:clamp(22px,3.4vw,34px);color:var(--gold);
+    letter-spacing:.06em;margin-top:10px;
+  }
+  .tagline{
+    margin-top:30px;font-family:'Mukta',sans-serif;
+    font-size:clamp(17px,2.2vw,23px);color:rgba(246,241,231,.82);
+    font-weight:600;max-width:640px;
+  }
+  .tagline-en{
+    margin-top:6px;font-size:14px;color:var(--grey);font-style:italic;
+    letter-spacing:.02em;
+  }
+  .pills{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
+  .pill{
+    font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+    border:1px solid rgba(201,162,74,.42);color:var(--gold-lt);
+    padding:7px 15px;border-radius:100px;font-weight:600;
+  }
+
+  /* SECTIONS */
+  section{padding:66px 0;border-bottom:1px solid rgba(246,241,231,.08)}
+  .sec-label{
+    font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin-bottom:10px;
+  }
+  h2{
+    font-family:'Poppins',sans-serif;font-weight:600;
+    font-size:clamp(24px,3.6vw,33px);margin-bottom:12px;line-height:1.25;
+  }
+  h2 .hi{font-family:'Mukta',sans-serif;color:var(--gold-lt);font-weight:700}
+  .lead{color:rgba(246,241,231,.66);max-width:720px;margin-bottom:34px;font-size:15.5px}
+
+  /* PALETTE */
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+  .swatch{border-radius:14px;overflow:hidden;border:1px solid rgba(246,241,231,.1);background:#0d1f2d}
+  .chip{height:96px;display:flex;align-items:flex-end;padding:10px;font-size:10.5px;font-weight:700;letter-spacing:.12em}
+  .swatch .meta{padding:12px 14px}
+  .swatch .nm{font-size:13px;font-weight:600;color:var(--ivory)}
+  .swatch .hex{font-size:11.5px;color:var(--grey);font-family:ui-monospace,monospace;letter-spacing:.04em}
+  .swatch .use{font-size:11.5px;color:rgba(246,241,231,.5);margin-top:3px}
+
+  /* LOGO CARDS */
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+  .card{
+    background:linear-gradient(170deg,rgba(246,241,231,.055),rgba(246,241,231,.018));
+    border:1px solid rgba(246,241,231,.1);border-radius:18px;padding:26px;
+  }
+  .card h3{font-family:'Poppins',sans-serif;font-size:15.5px;font-weight:600;margin-bottom:8px;color:var(--gold-lt);letter-spacing:.04em}
+  .card p{font-size:14px;color:rgba(246,241,231,.72)}
+  .card ul{margin:12px 0 0 18px;font-size:13.5px;color:rgba(246,241,231,.7)}
+  .card li{margin-bottom:6px}
+  .logo-stage{
+    background:var(--navy);border-radius:14px;border:1px solid rgba(201,162,74,.2);
+    display:flex;align-items:center;justify-content:center;padding:34px;margin-bottom:16px;
+    min-height:190px;
+  }
+  .smalllogo{display:flex;gap:22px;align-items:center;justify-content:center;margin-top:6px}
+  .smalllogo .box{
+    width:44px;height:44px;border-radius:50%;background:var(--navy);
+    border:1px solid rgba(201,162,74,.28);display:flex;align-items:center;justify-content:center;
+  }
+  .smalllogo .lbl{font-size:10.5px;color:var(--grey);text-align:center;margin-top:6px;letter-spacing:.05em}
+
+  /* BANNER MOCK */
+  .banner{
+    aspect-ratio:2048/1152;border-radius:16px;overflow:hidden;position:relative;
+    background:
+      radial-gradient(600px 300px at 78% 30%, rgba(201,162,74,.18), transparent 62%),
+      linear-gradient(120deg,#0B1D2A 0%,#0d2a30 48%,#14514B 100%);
+    border:1px solid rgba(201,162,74,.24);
+    display:flex;align-items:center;
+  }
+  .banner .wm{
+    position:absolute;left:6%;top:50%;transform:translateY(-50%);
+  }
+  .banner .wm .big{
+    font-family:'Mukta',sans-serif;font-weight:800;
+    font-size:clamp(26px,5.2vw,54px);color:var(--gold);letter-spacing:.04em;line-height:1;
+  }
+  .banner .wm .lat{
+    font-family:'Poppins',sans-serif;font-weight:600;
+    font-size:clamp(9px,1.5vw,15px);letter-spacing:.42em;color:var(--ivory);
+    margin-top:9px;
+  }
+  .banner .wm .tag{
+    font-family:'Mukta',sans-serif;font-size:clamp(8px,1.35vw,13.5px);
+    color:rgba(246,241,231,.68);margin-top:11px;font-weight:600;
+  }
+  .banner .portrait{
+    position:absolute;left:50%;top:0;transform:translateX(-50%);
+    width:26%;height:100%;
+    background:linear-gradient(180deg,rgba(201,162,74,.30),rgba(11,29,42,.12));
+    border-left:1px solid rgba(201,162,74,.2);
+    border-right:1px solid rgba(201,162,74,.2);
+    display:flex;align-items:center;justify-content:center;
+    font-size:9px;letter-spacing:.2em;color:rgba(246,241,231,.5);text-align:center;padding:8px;
+  }
+  .banner .right{
+    position:absolute;right:5%;top:50%;transform:translateY(-50%);
+    display:flex;flex-direction:column;gap:7px;
+  }
+  .banner .right div{
+    font-size:clamp(7px,1.15vw,11.5px);color:rgba(246,241,231,.82);
+    display:flex;gap:7px;align-items:center;font-weight:600;letter-spacing:.02em;
+  }
+  .banner .right span.dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex:0 0 auto}
+  .caption{font-size:12px;color:var(--grey);margin-top:12px;text-align:center;letter-spacing:.03em}
+
+  /* THUMBNAIL MOCK */
+  .thumbs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .thumb{
+    aspect-ratio:16/9;border-radius:10px;overflow:hidden;position:relative;
+    background:linear-gradient(135deg,#0B1D2A 0%,#123c3c 100%);
+    border:1px solid rgba(201,162,74,.28);padding:16px;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .thumb .kicker{font-size:8px;letter-spacing:.24em;color:var(--gold);font-weight:700;margin-bottom:6px}
+  .thumb .t{
+    font-family:'Mukta',sans-serif;font-weight:800;line-height:1.12;
+    font-size:clamp(13px,2.1vw,19px);color:var(--ivory);
+  }
+  .thumb .t em{color:var(--gold);font-style:normal}
+  .thumb .wm2{
+    position:absolute;right:10px;top:9px;font-family:'Mukta',sans-serif;
+    font-weight:700;font-size:11px;color:rgba(201,162,74,.85);
+  }
+  .thumb .ep{
+    position:absolute;left:16px;bottom:10px;font-size:8px;
+    letter-spacing:.18em;color:rgba(246,241,231,.45);font-weight:600;
+  }
+
+  /* TIMELINE */
+  .timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+  .beat{
+    border-left:2px solid var(--gold);padding:4px 0 4px 16px;
+  }
+  .beat .time{font-size:11px;color:var(--gold);letter-spacing:.14em;font-weight:700;font-family:ui-monospace,monospace}
+  .beat .what{font-size:13.5px;color:rgba(246,241,231,.78);margin-top:5px;font-family:'Mukta',sans-serif}
+  .beat .snd{font-size:11.5px;color:var(--grey);margin-top:4px}
+
+  /* TYPE SPECIMEN */
+  .specimen{border-top:1px solid rgba(246,241,231,.1);padding-top:18px;margin-top:8px}
+  .spec-row{display:flex;justify-content:space-between;align-items:baseline;gap:18px;flex-wrap:wrap;padding:11px 0;border-bottom:1px dashed rgba(246,241,231,.1)}
+  .spec-row .sample-hi{font-family:'Mukta',sans-serif;font-weight:700;font-size:22px;color:var(--ivory)}
+  .spec-row .sample-en{font-family:'Inter',sans-serif;font-weight:600;font-size:18px;color:var(--ivory)}
+  .spec-row .note{font-size:11.5px;color:var(--grey);letter-spacing:.06em;text-align:right}
+
+  /* TABLE */
+  .tablewrap{overflow-x:auto;border:1px solid rgba(246,241,231,.1);border-radius:14px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
+  th{
+    text-align:left;padding:13px 16px;font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--gold);background:rgba(201,162,74,.08);
+    border-bottom:1px solid rgba(201,162,74,.24);font-weight:700;
+  }
+  td{padding:12px 16px;border-bottom:1px solid rgba(246,241,231,.07);color:rgba(246,241,231,.8);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.name{font-family:'Poppins',sans-serif;font-weight:600;color:var(--ivory);letter-spacing:.03em}
+  .ok{color:#7FC8A9;font-weight:700}
+  .warn{color:var(--gold-lt);font-weight:700}
+  .bad{color:#E08A6B;font-weight:700}
+
+  /* RULES */
+  .rules{display:grid;gap:11px}
+  .rule{display:flex;gap:13px;align-items:flex-start;font-size:14px;color:rgba(246,241,231,.78)}
+  .rule .ic{
+    flex:0 0 22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:700;margin-top:1px;
+  }
+  .do .ic{background:rgba(127,200,169,.16);color:#7FC8A9}
+  .dont .ic{background:rgba(224,138,107,.16);color:#E08A6B}
+
+  footer{padding:52px 0 70px;text-align:center}
+  footer .fk{
+    font-family:'Poppins',sans-serif;font-size:13px;letter-spacing:.42em;
+    color:var(--gold);font-weight:600;margin-bottom:14px;
+  }
+  footer .note{font-size:12px;color:var(--grey);max-width:640px;margin:0 auto;line-height:1.75}
+  .checklist{display:grid;gap:9px;margin-top:6px}
+  .checklist label{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:rgba(246,241,231,.78);cursor:default}
+  .checklist .bx{
+    flex:0 0 17px;height:17px;border:1.5px solid rgba(201,162,74,.55);
+    border-radius:4px;margin-top:2px;
+  }
+  @media(max-width:640px){
+    .banner{aspect-ratio:auto;height:200px}
+    .banner .portrait{display:none}
+    .banner .right{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Brand Identity Guide · 26 Oct 2026</div>
+    <div class="lockup">
+      <div class="mark">
+        <!-- LOGO MARK: bindu + page fold -->
+        <svg width="104" height="104" viewBox="0 0 104 104" fill="none" aria-label="Saarvaan logo mark">
+          <circle cx="52" cy="52" r="50" stroke="#C9A24A" stroke-opacity=".45" stroke-width="1.2"/>
+          <!-- page fold forming rising shape -->
+          <path d="M30 72V38l22-10v44L30 72z" fill="#F6F1E7" fill-opacity=".92"/>
+          <path d="M52 28l22 10v34L52 82V28z" fill="#C9A24A" fill-opacity=".88"/>
+          <path d="M52 28v54" stroke="#0B1D2A" stroke-width="1.6"/>
+          <!-- bindu -->
+          <circle cx="52" cy="17" r="6" fill="#C9A24A"/>
+          <circle cx="52" cy="17" r="9.5" stroke="#C9A24A" stroke-opacity=".35" stroke-width="1"/>
+        </svg>
+      </div>
+      <div>
+        <h1>SAARVAAN</h1>
+        <div class="deva">सारवान</div>
+      </div>
+    </div>
+    <p class="tagline">किताबों का सार, ज़िंदगी में बदलाव।</p>
+    <p class="tagline-en">The essence of books, applied to real life.</p>
+    <div class="pills">
+      <span class="pill">@saarvaan</span>
+      <span class="pill">Book Summaries</span>
+      <span class="pill">Psychology</span>
+      <span class="pill">Habits &amp; Discipline</span>
+      <span class="pill">Hindi · Hinglish</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- PALETTE -->
+  <section>
+    <div class="sec-label">01 · Colour System</div>
+    <h2>Brand <span class="hi">रंग</span></h2>
+    <p class="lead">60–20–10 rule: गहरा navy माहौल बनाता है, gold premium लगता है, ivory पढ़ने में आसान। Copper सिर्फ़ 3% — urgency और numbers के लिए।</p>
+    <div class="palette">
+      <div class="swatch">
+        <div class="chip" style="background:#0B1D2A;color:#8A94A0">60%</div>
+        <div class="meta"><div class="nm">Deep Ink Navy</div><div class="hex">#0B1D2A</div><div class="use">Backgrounds, thumbnails</div></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#C9A24A;color:#3a2c0d">20%</div>
+        <div class="meta"><div class="nm">Antique Gold</div><div class="hex">#C9A24A</div><div class="use">Logo, highlights, CTA</div></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#F6F1E7;color:#7b7466">10%</div>
+        <div class="meta"><div class="nm">Ivory Parchment</div><div class="hex">#F6F1E7</div><div class="use">Text, cards, slides</div></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#14514B;color:#8FB8AE">7%</div>
+        <div class="meta"><div class="nm">Deep Teal</div><div class="hex">#14514B</div><div class="use">Gradients, section blocks</div></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#B4622D;color:#f0d4c2">3%</div>
+        <div class="meta"><div class="nm">Warm Copper</div><div class="hex">#B4622D</div><div class="use">Numbers, arrows, urgency</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO -->
+  <section>
+    <div class="sec-label">02 · Logo</div>
+    <h2>The Bindu &amp; The <span class="hi">Page</span></h2>
+    <p class="lead">एक खुली किताब का कोना जो ऊपर उठते हुए आकार में बदलता है — "ज्ञान जो ऊपर उठाता है"। ऊपर का gold बिंदु = <strong>सार</strong> (essence / bindu). यही पूरे brand की पहचान है।</p>
+    <div class="grid2">
+      <div class="card">
+        <div class="logo-stage">
+          <svg width="150" height="150" viewBox="0 0 104 104" fill="none">
+            <circle cx="52" cy="52" r="50" stroke="#C9A24A" stroke-opacity=".4" stroke-width="1.2"/>
+            <path d="M30 72V38l22-10v44L30 72z" fill="#F6F1E7" fill-opacity=".92"/>
+            <path d="M52 28l22 10v34L52 82V28z" fill="#C9A24A" fill-opacity=".88"/>
+            <path d="M52 28v54" stroke="#0B1D2A" stroke-width="1.6"/>
+            <circle cx="52" cy="17" r="6" fill="#C9A24A"/>
+            <circle cx="52" cy="17" r="9.5" stroke="#C9A24A" stroke-opacity=".35" stroke-width="1"/>
+          </svg>
+        </div>
+        <h3>Primary Mark</h3>
+        <p>Profile picture के लिए। Navy background पर हमेशा। कोई text नहीं — 32px पर भी पहचाना जाए।</p>
+      </div>
+      <div class="card">
+        <h3>Wordmark Lockup</h3>
+        <p style="margin-bottom:18px">Banner, intro, video end-card के लिए।</p>
+        <div class="logo-stage" style="min-height:auto;padding:26px;flex-direction:column;gap:8px">
+          <div style="font-family:'Mukta',sans-serif;font-weight:800;font-size:40px;color:#C9A24A;line-height:1">सारवान</div>
+          <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;letter-spacing:.42em;color:#F6F1E7">SAARVAAN</div>
+        </div>
+        <p>Poppins SemiBold · tracking +40 · Devanagari में Mukta Bold 800.</p>
+        <div class="smalllogo">
+          <div>
+            <div class="box">
+              <svg width="26" height="26" viewBox="0 0 104 104" fill="none">
+                <path d="M30 72V38l22-10v44L30 72z" fill="#F6F1E7" fill-opacity=".92"/>
+                <path d="M52 28l22 10v34L52 82V28z" fill="#C9A24A" fill-opacity=".9"/>
+                <circle cx="52" cy="17" r="8" fill="#C9A24A"/>
+              </svg>
+            </div>
+            <div class="lbl">32px test</div>
+          </div>
+          <div>
+            <div class="box" style="background:#C9A24A">
+              <svg width="26" height="26" viewBox="0 0 104 104" fill="none">
+                <path d="M30 72V38l22-10v44L30 72z" fill="#0B1D2A"/>
+                <path d="M52 28l22 10v34L52 82V28z" fill="#0B1D2A" fill-opacity=".55"/>
+              </svg>
+            </div>
+            <div class="lbl">Inverse</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER -->
+  <section>
+    <div class="sec-label">03 · Banner</div>
+    <h2>Channel Art <span class="hi">Layout</span></h2>
+    <p class="lead">2048 × 1152 px · safe area 1546 × 423. Mobile पर सिर्फ़ बायाँ हिस्सा दिखेगा — इसलिए wordmark बड़ा और बाईं ओर।</p>
+    <div class="banner">
+      <div class="wm">
+        <div class="big">सारवान</div>
+        <div class="lat">SAARVAAN</div>
+        <div class="tag">किताबों का सार, ज़िंदगी में बदलाव।</div>
+      </div>
+      <div class="portrait">YOUR<br>PORTRAIT<br>(3/4 angle)</div>
+      <div class="right">
+        <div><span class="dot"></span>हर मंगलवार व शुक्रवार</div>
+        <div><span class="dot"></span>Book Summaries · Psychology</div>
+        <div><span class="dot"></span>Habits · Focus · Discipline</div>
+        <div><span class="dot"></span>Hindi &amp; Hinglish</div>
+      </div>
+    </div>
+    <p class="caption">Left: wordmark + tagline · Centre: portrait with gold rim light · Right: value props</p>
+  </section>
+
+  <!-- THUMBNAILS -->
+  <section>
+    <div class="sec-label">04 · Thumbnail System</div>
+    <h2>एक जैसा दिखे, हर <span class="hi">बार</span></h2>
+    <p class="lead">हर thumbnail पर top-right में छोटा gold <strong>सा</strong> watermark और नीचे episode number। 6 महीने बाद feed में सिर्फ़ रंग देखकर पहचान हो जानी चाहिए।</p>
+    <div class="thumbs">
+      <div class="thumb">
+        <div class="kicker">BOOK SUMMARY</div>
+        <div class="t">Atomic Habits का सार<br><em>1% बेहतर</em> कैसे बनें?</div>
+        <div class="wm2">सा</div>
+        <div class="ep">सार #012</div>
+      </div>
+      <div class="thumb">
+        <div class="kicker">PSYCHOLOGY</div>
+        <div class="t">The Psychology of Money<br><em>10 सबक़</em></div>
+        <div class="wm2">सा</div>
+        <div class="ep">सार #013</div>
+      </div>
+      <div class="thumb">
+        <div class="kicker">FOCUS</div>
+        <div class="t">Deep Work का सार<br><em>Focus</em> वापस पाइए</div>
+        <div class="wm2">सा</div>
+        <div class="ep">सार #014</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section>
+    <div class="sec-label">05 · Intro &amp; Outro</div>
+    <h2>3.5 सेकंड का <span class="hi">परिचय</span></h2>
+    <p class="lead">Intro छोटा रखें — retention बचाने के लिए। हर वीडियो में बिल्कुल एक जैसा।</p>
+    <div class="timeline">
+      <div class="beat">
+        <div class="time">0.0 – 0.8s</div>
+        <div class="what">काली स्क्रीन पर एक gold बिंदु चमकता है</div>
+        <div class="snd">🎵 हल्की tanpura single note</div>
+      </div>
+      <div class="beat">
+        <div class="time">0.8 – 1.8s</div>
+        <div class="what">बिंदु से किताब के पन्ने फूटकर ऊपर उठते हैं</div>
+        <div class="snd">🔊 कागज़ पलटने की soft sound</div>
+      </div>
+      <div class="beat">
+        <div class="time">1.8 – 2.8s</div>
+        <div class="what">पन्ने मिलकर "सारवान" wordmark बनाते हैं</div>
+        <div class="snd">🎙️ आपकी आवाज़: "सारवान"</div>
+      </div>
+      <div class="beat">
+        <div class="time">2.8 – 3.5s</div>
+        <div class="what">Wordmark corner में सिकुड़कर watermark बनता है</div>
+        <div class="snd">🎵 संगीत फीका → content शुरू</div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:24px">
+      <h3>Outro — 8 seconds</h3>
+      <p style="margin-bottom:14px">बाईं ओर gold panel: <strong>"इस वीडियो का एक काम"</strong> — आज का action step। दाईं ओर 2 next-video cards। नीचे:</p>
+      <p style="font-family:'Mukta',sans-serif;font-size:17px;color:#C9A24A;font-weight:700">एक किताब। एक सबक़। एक क़दम।</p>
+      <p style="font-size:13px;color:#8A94A0;margin-top:8px">Voiceover: "अगर आज का सार काम आया, तो अगली किताब भी आपके लिए है — subscribe कर लीजिए।"</p>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section>
+    <div class="sec-label">06 · Typography</div>
+    <h2>Font <span class="hi">System</span></h2>
+    <p class="lead">दो ही font परिवार — एक Devanagari के लिए, एक Latin के लिए। इससे हर जगह एक जैसा professional लुक आएगा।</p>
+    <div class="specimen">
+      <div class="spec-row">
+        <span class="sample-hi">किताबों का सार</span>
+        <span class="note">Mukta · Bold 700 · Headings (Hindi)</span>
+      </div>
+      <div class="spec-row">
+        <span class="sample-en">SAARVAAN</span>
+        <span class="note">Poppins · SemiBold 600 · tracking +40 · Wordmark</span>
+      </div>
+      <div class="spec-row">
+        <span class="sample-en" style="font-weight:400">The essence of books</span>
+        <span class="note">Inter · Regular 400 · Body / Latin</span>
+      </div>
+      <div class="spec-row">
+        <span class="sample-hi" style="font-weight:400;font-size:18px">आदतें, अनुशासन और ध्यान</span>
+        <span class="note">Mukta · Regular 400 · Body (Hindi)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HANDLE -->
+  <section>
+    <div class="sec-label">07 · Handles</div>
+    <h2>नाम और <span class="hi">Handle</span> — दोनों अलग</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Platform</th><th>Handle</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">YouTube</td><td>@saarvaan</td><td><span class="ok">✓ Verified free</span> <span style="color:#8A94A0;font-size:11.5px">(26 Oct 2026)</span></td></tr>
+          <tr><td class="name">Backup 1</td><td>@saarvaanbooks</td><td><span class="warn">Not verified</span></td></tr>
+          <tr><td class="name">Backup 2</td><td>@saarvaanofficial</td><td><span class="warn">Not verified</span></td></tr>
+          <tr><td class="name">Instagram / X / Telegram</td><td>saarvaan</td><td><span class="warn">Not verified</span> <span style="color:#8A94A0;font-size:11.5px">(blocked — 403)</span></td></tr>
+          <tr><td class="name">Trademark (Class 41)</td><td>—</td><td><span class="bad">Not verified</span> <span style="color:#8A94A0;font-size:11.5px">(database unreachable)</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lead" style="margin-top:20px;margin-bottom:0">Handle free होने का मतलब यह नहीं कि नाम trademark-safe भी है। Launch से पहले Class 41 (education/entertainment) में एक trademark search ज़रूर करवाएँ।</p>
+  </section>
+
+  <!-- RULES -->
+  <section>
+    <div class="sec-label">08 · Do &amp; Don't</div>
+    <h2>Brand <span class="hi">नियम</span></h2>
+    <div class="grid2">
+      <div class="card">
+        <h3 style="color:#7FC8A9">✓ करें</h3>
+        <div class="rules do">
+          <div class="rule"><span class="ic">✓</span><span>हर thumbnail में वही Navy + Gold + Ivory</span></div>
+          <div class="rule"><span class="ic">✓</span><span>Title format: <em>[Book] का सार: [Benefit] | Saarvaan</em></span></div>
+          <div class="rule"><span class="ic">✓</span><span>हर वीडियो के अंत में "आज का एक काम"</span></div>
+          <div class="rule"><span class="ic">✓</span><span>Description में 3 brand keywords हमेशा</span></div>
+          <div class="rule"><span class="ic">✓</span><span>Intro 4 सेकंड से कम, हर बार एक जैसा</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:#E08A6B">✗ न करें</h3>
+        <div class="rules dont">
+          <div class="rule"><span class="ic">✗</span><span>Neon green / bright red / purple-pink gradients</span></div>
+          <div class="rule"><span class="ic">✗</span><span>Graduation cap, bulb, brain या धुआँता हुआ सिर</span></div>
+          <div class="rule"><span class="ic">✗</span><span>हर thumbnail पर अलग font या अलग style</span></div>
+          <div class="rule"><span class="ic">✗</span><span>नाम में numbers या underscores (<em>Saarvaan_2026</em>)</span></div>
+          <div class="rule"><span class="ic">✗</span><span>लंबा "thanks for watching" outro</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section style="border-bottom:none">
+    <div class="sec-label">09 · Pre-Upload Checklist</div>
+    <h2>हर वीडियो से <span class="hi">पहले</span></h2>
+    <div class="checklist">
+      <label><span class="bx"></span><span>Thumbnail में सिर्फ़ Navy + Gold + Ivory?</span></label>
+      <label><span class="bx"></span><span><strong>सा</strong> watermark top-right में मौजूद?</span></label>
+      <label><span class="bx"></span><span>Title में book name + "का सार" + "Saarvaan"?</span></label>
+      <label><span class="bx"></span><span>Intro 4 सेकंड से कम और वही 4 animation?</span></label>
+      <label><span class="bx"></span><span>Outro में "आज का एक काम" दिख रहा है?</span></label>
+      <label><span class="bx"></span><span>Description में <em>Saarvaan</em>, <em>सारवान</em>, <em>Saarvaan book summary</em>?</span></label>
+      <label><span class="bx"></span><span>Episode number (सार #___) अपडेट किया?</span></label>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="fk">SAARVAAN · सारवान</div>
+  <p class="note">
+    Handle availability <strong>live verified</strong> on 26 October 2026 (youtube.com/@saarvaan returned no channel).<br>
+    Trademark, Instagram/X handles and domain availability are <strong>not verified</strong> — verify before launch.<br>
+    No name can be guaranteed 100% unique without a full trademark search.
+  </p>
+</footer>
+
+</body>
+</html>
