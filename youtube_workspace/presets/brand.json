@@ -1,0 +1,51 @@
+{
+  "channel": "Ronny Raj",
+  "language": "hi-IN",
+  "palette": {
+    "bg_dark": "#0B0F1A",
+    "bg_mid": "#141C2E",
+    "accent": "#FFB020",
+    "accent2": "#2ED3B7",
+    "text": "#FFFFFF",
+    "text_muted": "#C7D0E0",
+    "danger": "#FF5A5F"
+  },
+  "fonts": {
+    "display": "display",
+    "heading": "deva-bold",
+    "body": "deva-regular",
+    "latin": "latin-bold"
+  },
+  "safe_margin": 120,
+  "watermark": "Ronny Raj",
+  "handle": "@ronnyraj",
+  "thumbnail": {
+    "size": [1280, 720],
+    "max_words": 5,
+    "min_font_px": 96,
+    "text_share": 0.58
+  },
+  "video": {
+    "longform": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "crf": 18,
+      "audio_bitrate": "192k",
+      "loudness_lufs": -14
+    },
+    "shorts": {
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "crf": 19,
+      "max_seconds": 58
+    }
+  },
+  "subtitle": {
+    "fonts": "Noto Sans Devanagari",
+    "max_chars_per_line": 38,
+    "max_lines": 2,
+    "max_cps": 16
+  }
+}

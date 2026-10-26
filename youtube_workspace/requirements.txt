@@ -1,0 +1,27 @@
+# Verified working set — Python 3.11, Debian 12, 2 vCPU / 4 GB RAM
+# Install:  python3 -m venv .venv && .venv/bin/pip install -r youtube_workspace/requirements.txt
+# (the venv must live at the repo root: /home/user/Video-creation-/.venv)
+
+# --- media core -------------------------------------------------------
+av==18.1.0              # PyAV build of FFmpeg libs: probing, frame access (no ffprobe needed)
+imageio-ffmpeg==0.6.0   # ships a static FFmpeg 7.0.2 binary (libass, libx264, libmp3lame)
+moviepy==2.2.1          # optional high-level editing helpers
+
+# --- image / typography -----------------------------------------------
+pillow==11.3.0          # raster canvas, compositing
+uharfbuzz==0.57.0       # Devanagari shaping (matra reorder, conjuncts, kerning)
+freetype-py==2.5.1      # glyph rasterisation for the shaped output
+fonttools==4.67.0       # variable-font instancing (Noto Sans Devanagari weights)
+numpy==2.4.6            # gradients, noise, grain, analysis
+
+# --- audio ------------------------------------------------------------
+soundfile==0.14.0       # WAV read/write (libsndfile)
+scipy==1.17.1           # FFT convolution reverb, filtering for music synthesis
+
+# --- subtitles --------------------------------------------------------
+srt==3.5.3              # .srt writing
+pysubs2==1.8.1          # styled .ass for burn-in
+
+# --- optional / situational -------------------------------------------
+# edge-tts==7.3.1       # installed but unusable here: speech.platform.bing.com is blocked
+#                       # keep for local use where the endpoint is reachable

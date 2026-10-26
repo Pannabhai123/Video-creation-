@@ -1,0 +1,35 @@
+[
+  {
+    "file": "/home/user/Video-creation-/youtube_workspace/projects/test_scaffold/project.json",
+    "checks": [
+      {
+        "name": "missing_image_assets",
+        "value": 0,
+        "status": "PASS",
+        "expect": "no missing files"
+      },
+      {
+        "name": "narration_length",
+        "value": "0 chars ≈ 0.00 min",
+        "status": "WARN",
+        "expect": "non-trivial narration"
+      },
+      {
+        "name": "voiceover_files",
+        "value": "0/8",
+        "status": "FAIL",
+        "expect": "one WAV per scene for final render"
+      },
+      {
+        "name": "visual_variety",
+        "value": "2 types: ['bullets', 'title']",
+        "status": "WARN",
+        "expect": ">= 3 scene types for retention"
+      }
+    ],
+    "warnings": [
+      "8 scenes have no narration audio — timings are estimates, not measured"
+    ],
+    "errors": []
+  }
+]

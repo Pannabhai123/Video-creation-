@@ -1,0 +1,36 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Generated media (reproducible with one command — keep the repo small)
+youtube_workspace/generated_assets/*
+!youtube_workspace/generated_assets/.gitkeep
+youtube_workspace/rendered_videos/*
+!youtube_workspace/rendered_videos/.gitkeep
+youtube_workspace/shorts/*
+!youtube_workspace/shorts/.gitkeep
+youtube_workspace/music/*.wav
+youtube_workspace/voiceovers/*.wav
+youtube_workspace/stock_footage/*.mp4
+youtube_workspace/projects/*/clips/
+youtube_workspace/projects/*/render/
+youtube_workspace/projects/*/voiceover/*.wav
+youtube_workspace/quality_reports/f_*.png
+youtube_workspace/quality_reports/text_test.png
+youtube_workspace/quality_reports/sub_check.png
+youtube_workspace/quality_reports/contact_sheet.png
+
+# Keep these tracked: templates, scripts, fonts, thumbnails, docs, presets, SRT
+!youtube_workspace/thumbnails/*.png
+!youtube_workspace/subtitles/**/*.srt
+!youtube_workspace/assets/fonts/*.ttf
+
+# OS / editor
+.DS_Store
+*.swp
+
+# QC scratch frames and previews (reports .md/.json are tracked, images are not)
+youtube_workspace/quality_reports/*.png
+youtube_workspace/thumbnails/*_mobile.png
