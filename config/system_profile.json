@@ -1,0 +1,141 @@
+{
+  "hardware": {
+    "os": {
+      "system": "Linux",
+      "release": "6.1.158+",
+      "distro": "Debian GNU/Linux 12 (bookworm)",
+      "arch": "x86_64"
+    },
+    "cpu": {
+      "model": "Intel(R) Xeon(R) Processor @ 2.60GHz",
+      "logical_cores": 2,
+      "simd_extensions": [
+        "sse4_2",
+        "avx",
+        "avx2",
+        "avx512f",
+        "avx512bw",
+        "avx512_vnni"
+      ]
+    },
+    "memory": {
+      "total_gb": 3.85,
+      "available_gb": 3.51,
+      "swap_gb": 0.0
+    },
+    "storage": {
+      "total_gb": 20.34,
+      "used_gb": 2.98,
+      "free_gb": 17.08
+    },
+    "gpu": {
+      "hardware_gpu_available": false,
+      "nvidia_gpu": null,
+      "dri_devices": [],
+      "acceleration_mode": "cpu_simd_fallback"
+    }
+  },
+  "ffmpeg": {
+    "installed": true,
+    "ffmpeg_path": "/usr/local/bin/ffmpeg",
+    "ffprobe_path": "/usr/local/bin/ffprobe",
+    "version_banner": "ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers",
+    "encoders": {
+      "libx264": true,
+      "libx265": true,
+      "libvpx-vp9": true,
+      "libaom-av1": true,
+      "aac": true,
+      "libmp3lame": true,
+      "libopus": true,
+      "mov_text": true,
+      "srt": true,
+      "h264_nvenc": false,
+      "h264_vaapi": false,
+      "h264_qsv": false
+    },
+    "filters": {
+      "subtitles": true,
+      "ass": true,
+      "loudnorm": true,
+      "afftdn": true,
+      "sidechaincompress": true,
+      "acompressor": true,
+      "acrossfade": true,
+      "xfade": true,
+      "zoompan": true,
+      "scale": true
+    }
+  },
+  "python": {
+    "python_version": "3.11.2",
+    "executable": "/usr/bin/python3",
+    "packages": {
+      "moviepy": "2.2.1",
+      "opencv-python-headless": "5.0.0.93",
+      "Pillow": "11.3.0",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "imageio": "2.38.1",
+      "imageio-ffmpeg": "0.6.0",
+      "av": "18.1.0",
+      "soundfile": "0.14.0",
+      "librosa": "0.11.0",
+      "noisereduce": "3.0.3",
+      "pydub": "0.25.1",
+      "pyloudnorm": "0.2.0",
+      "pysrt": "1.1.2",
+      "srt": "3.5.3",
+      "webvtt-py": "0.6.0",
+      "espeakng-loader": "0.2.4",
+      "pocketsphinx": "5.1.1",
+      "faster-whisper": "1.2.1",
+      "PyYAML": "6.0.3",
+      "rich": "15.0.0"
+    }
+  },
+  "node_and_remotion": {
+    "node_version": "v22.22.3",
+    "npm_version": "10.9.8",
+    "remotion_version": "4.0.538",
+    "chromium_path": "/usr/local/bin/chromium",
+    "chromium_version": "Chromium 153.0.8010.0",
+    "imagemagick": "Version: ImageMagick 6.9.11-60 Q16 x86_64 2021-01-25 https://imagemagick.org",
+    "studio_fonts": [
+      "BebasNeue-Regular.ttf",
+      "JetBrainsMono-Regular.ttf",
+      "Poppins-Black.ttf",
+      "Poppins-Bold.ttf",
+      "Poppins-ExtraBold.ttf",
+      "Poppins-Medium.ttf",
+      "Poppins-Regular.ttf",
+      "Poppins-SemiBold.ttf"
+    ]
+  },
+  "network_and_apis": {
+    "https_reachability": {
+      "github.com": true,
+      "registry.npmjs.org": true,
+      "pypi.org": true,
+      "deb.debian.org": false,
+      "huggingface.co": false,
+      "api.openai.com": false
+    },
+    "configured_api_keys": {
+      "OPENAI_API_KEY": false,
+      "ANTHROPIC_API_KEY": false,
+      "GEMINI_API_KEY": false,
+      "ELEVENLABS_API_KEY": false,
+      "PEXELS_API_KEY": false,
+      "PIXABAY_API_KEY": false,
+      "WHISPER_LOCAL_MODEL_PATH": false
+    }
+  },
+  "optimization_recommendations": {
+    "ffmpeg_threads": 2,
+    "remotion_concurrency": 1,
+    "segmented_rendering_recommended": true,
+    "default_export_preset": "youtube_1080p",
+    "4k_practical_assessment": "Supported via segmented CPU encoding (preset=veryfast/fast), but 1080p30 is recommended as default on 2-vCPU / 3.8 GiB RAM CPU-only hardware."
+  }
+}

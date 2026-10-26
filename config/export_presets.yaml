@@ -1,0 +1,126 @@
+# Reusable Export Presets for Long-Form YouTube Videos
+# Aligned with official YouTube Recommended Upload Encoding Settings:
+# https://support.google.com/youtube/answer/1722171
+
+default_preset: youtube_1080p
+
+presets:
+  youtube_1080p:
+    description: "Standard YouTube Long-Form Full HD (1080p30, 16:9, H.264 High + AAC, -14 LUFS)"
+    width: 1920
+    height: 1080
+    aspect_ratio: "16:9"
+    fps: 30
+    container: "mp4"
+    video:
+      codec: "libx264"
+      hw_codecs_priority: ["h264_nvenc", "h264_vaapi", "h264_qsv"]
+      profile: "high"
+      level: "4.2"
+      pixel_format: "yuv420p"
+      color_space: "bt709"
+      crf: 18
+      preset: "medium"
+      maxrate: "12M"
+      bufsize: "24M"
+      gop_seconds: 2
+      bframes: 2
+      movflags: "+faststart"
+    audio:
+      codec: "aac"
+      bitrate: "192k"
+      sample_rate: 48000
+      channels: 2
+      target_lufs: -14.0
+      true_peak_dbtp: -1.0
+
+  youtube_1080p60:
+    description: "High-Motion YouTube Long-Form Full HD (1080p60, 16:9, H.264 High + AAC, -14 LUFS)"
+    width: 1920
+    height: 1080
+    aspect_ratio: "16:9"
+    fps: 60
+    container: "mp4"
+    video:
+      codec: "libx264"
+      hw_codecs_priority: ["h264_nvenc", "h264_vaapi", "h264_qsv"]
+      profile: "high"
+      level: "4.2"
+      pixel_format: "yuv420p"
+      color_space: "bt709"
+      crf: 18
+      preset: "medium"
+      maxrate: "15M"
+      bufsize: "30M"
+      gop_seconds: 2
+      bframes: 2
+      movflags: "+faststart"
+    audio:
+      codec: "aac"
+      bitrate: "192k"
+      sample_rate: 48000
+      channels: 2
+      target_lufs: -14.0
+      true_peak_dbtp: -1.0
+
+  youtube_4k:
+    description: "Ultra HD YouTube Long-Form 4K (2160p30, 16:9, H.264 High@5.1 + AAC 256k, -14 LUFS)"
+    width: 3840
+    height: 2160
+    aspect_ratio: "16:9"
+    fps: 30
+    container: "mp4"
+    practical_requirements:
+      min_recommended_ram_gb: 8.0
+      min_recommended_vcpus: 4
+      low_ram_cpu_preset_override: "veryfast"
+    video:
+      codec: "libx264"
+      hw_codecs_priority: ["h264_nvenc", "h264_vaapi", "h264_qsv"]
+      profile: "high"
+      level: "5.1"
+      pixel_format: "yuv420p"
+      color_space: "bt709"
+      crf: 18
+      preset: "fast"
+      maxrate: "40M"
+      bufsize: "80M"
+      gop_seconds: 2
+      bframes: 2
+      movflags: "+faststart"
+    audio:
+      codec: "aac"
+      bitrate: "256k"
+      sample_rate: 48000
+      channels: 2
+      target_lufs: -14.0
+      true_peak_dbtp: -1.0
+
+  youtube_720p_draft:
+    description: "Fast Draft Preview (720p30, 16:9, H.264 + AAC)"
+    width: 1280
+    height: 720
+    aspect_ratio: "16:9"
+    fps: 30
+    container: "mp4"
+    video:
+      codec: "libx264"
+      hw_codecs_priority: ["h264_nvenc", "h264_vaapi", "h264_qsv"]
+      profile: "high"
+      level: "4.0"
+      pixel_format: "yuv420p"
+      color_space: "bt709"
+      crf: 22
+      preset: "veryfast"
+      maxrate: "6M"
+      bufsize: "12M"
+      gop_seconds: 2
+      bframes: 2
+      movflags: "+faststart"
+    audio:
+      codec: "aac"
+      bitrate: "160k"
+      sample_rate: 48000
+      channels: 2
+      target_lufs: -14.0
+      true_peak_dbtp: -1.0

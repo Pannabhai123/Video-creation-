@@ -1,0 +1,60 @@
+# Default Workflow Configuration for AI & Automated Long-Form YouTube Production
+# Configured per Permanent Channel Preferences (Hindi Book Summaries & Self-Improvement)
+
+channel:
+  name: "Mindset & Book Wisdom"
+  tagline: "Book Summaries • Psychology • Habits • Self-Improvement"
+  niches:
+    - "Book Summaries"
+    - "Self-Improvement"
+    - "Personal Development"
+    - "Psychology"
+    - "Productivity"
+    - "Habits and Discipline"
+    - "Motivation"
+    - "Educational Content"
+  accent_color: "#38BDF8"      # Sky Cyan
+  secondary_color: "#818CF8"   # Indigo Glow
+  background_dark: "#0B1120"   # Deep Slate Navy
+  highlight_color: "#FACC15"   # Broadcast Gold
+
+narration:
+  provider: "auto"             # auto | file | espeak | openai | elevenlabs
+  language: "hi"               # Default Hindi voice-over per Permanent Channel Preferences
+  words_per_minute: 145
+  espeak_voice: "hi"
+  espeak_speed_wpm: 152
+  espeak_pitch: 46
+  apply_noise_reduction_on_external_audio: true
+
+music:
+  enabled: true
+  mode: "procedural_ambient"   # procedural_ambient | file | none
+  sfx_enabled: true            # Copyright-safe transition whooshes & chapter chimes
+  sfx_gain_db: -20.5
+  base_gain_db: -17.0
+  ducked_gain_db: -27.5        # Auto-ducks ~10.5 dB below base during speech
+  fade_in_sec: 1.2
+  fade_out_sec: 2.0
+
+subtitles:
+  enabled: true
+  language: "hi"
+  burn_in: true                # Render styled captions directly onto video
+  embed_soft_track: true       # Also mux toggleable mov_text subtitle stream into MP4
+  max_chars_per_line: 42
+  max_words_per_cue: 8
+  font_name: "Poppins SemiBold"
+  font_size_1080p: 44
+  margin_v_1080p: 68
+
+rendering:
+  engine: "auto"               # auto (Remotion HarfBuzz for Hindi/Indic; Hybrid for Latin) | hybrid | python | remotion
+  resumable_segments: true
+  use_stage_checkpoints: true
+  transition_style: "fade"
+  transition_duration_sec: 0.45
+  ken_burns_zoom: 0.06
+  include_intro: true
+  include_outro_end_screen: true
+  generate_thumbnail: true

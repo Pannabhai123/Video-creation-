@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=66.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yt-studio"
+version = "1.0.0"
+description = "Complete AI & Automated YouTube Long-Form Video Production System"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "moviepy>=2.0.0",
+    "opencv-python-headless>=4.8.0",
+    "Pillow>=10.0.0",
+    "numpy>=1.26.0",
+    "scipy>=1.11.0",
+    "imageio>=2.34.0",
+    "imageio-ffmpeg>=0.5.0",
+    "av>=12.0.0",
+    "soundfile>=0.12.0",
+    "librosa>=0.10.0",
+    "noisereduce>=3.0.0",
+    "pydub>=0.25.1",
+    "pyloudnorm>=0.1.1",
+    "pysrt>=1.1.2",
+    "srt>=3.5.3",
+    "webvtt-py>=0.5.1",
+    "espeakng-loader>=0.2.0",
+    "pocketsphinx>=5.0.0",
+    "faster-whisper>=1.0.0",
+    "pyyaml>=6.0",
+    "rich>=13.0.0",
+    "click>=8.1.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+yt-studio = "yt_studio.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["yt_studio*"]

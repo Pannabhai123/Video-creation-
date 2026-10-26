@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-10-26",
+  "default_language": "hi",
+  "default_export_preset": "youtube_1080p",
+  "channel_profile": {
+    "niches": [
+      "Book Summaries",
+      "Self-Improvement",
+      "Personal Development",
+      "Psychology",
+      "Productivity",
+      "Habits and Discipline",
+      "Motivation",
+      "Educational Content"
+    ],
+    "style": "professional, educational, engaging, clear, non-clickbait",
+    "fact_policy": "verify_claims_no_fabricated_quotes_or_facts"
+  },
+  "permanent_15_step_workflow": [
+    {
+      "step": 1,
+      "id": "research_topic",
+      "name": "Research the topic",
+      "primary_tools": ["web_search", "fetch_page", "yt_studio.scriptwriter"],
+      "checkpoint_key": "01_research"
+    },
+    {
+      "step": 2,
+      "id": "write_script",
+      "name": "Write an original, engaging Hindi script with practical examples",
+      "primary_tools": ["agent_authoring", "yt_studio.scriptwriter"],
+      "checkpoint_key": "02_script"
+    },
+    {
+      "step": 3,
+      "id": "verify_facts",
+      "name": "Verify important facts, author names, studies, and avoid fabricated quotes",
+      "primary_tools": ["web_search", "fact_check_review"],
+      "checkpoint_key": "03_fact_check"
+    },
+    {
+      "step": 4,
+      "id": "divide_into_scenes",
+      "name": "Divide the script into structured visual scenes & storyboard",
+      "primary_tools": ["yt_studio.scriptwriter.build_storyboard"],
+      "checkpoint_key": "04_storyboard"
+    },
+    {
+      "step": 5,
+      "id": "generate_scene_images",
+      "name": "Generate scene-specific consistent images according to the script",
+      "primary_tools": ["generate_image (offer_options=false)", "yt_studio.graphics.build_scene_visual_panel"],
+      "parallelizable": true,
+      "checkpoint_key": "05_images"
+    },
+    {
+      "step": 6,
+      "id": "generate_video_clips",
+      "name": "Generate motion video clips from scene images and prompts (Ken Burns, transitions, kinetic text)",
+      "primary_tools": ["remotion_src/SceneCard.tsx", "yt_studio.graphics.ContentSceneAnimator", "ffmpeg"],
+      "checkpoint_key": "06_motion_clips"
+    },
+    {
+      "step": 7,
+      "id": "create_hindi_voiceover",
+      "name": "Create clear Hindi voice-over",
+      "primary_tools": [
+        "add_voice + generate_speech (language='hi' / 'hi-IN' when interactive neural voice requested)",
+        "user_supplied_voiceover_file",
+        "yt_studio.audio_engine.synthesize_espeak_segment (language='hi' offline fallback)"
+      ],
+      "checkpoint_key": "07_voiceover"
+    },
+    {
+      "step": 8,
+      "id": "add_music_and_sfx",
+      "name": "Add copyright-safe background music (auto-ducked) and transition/chapter sound effects",
+      "primary_tools": [
+        "yt_studio.audio_engine.generate_copyright_safe_music",
+        "yt_studio.audio_engine.generate_scene_sfx_track",
+        "pyloudnorm (-14.0 LUFS)"
+      ],
+      "checkpoint_key": "08_music_sfx"
+    },
+    {
+      "step": 9,
+      "id": "edit_and_synchronize",
+      "name": "Edit and synchronize voiceover, visuals, music ducking, and scene durations",
+      "primary_tools": ["yt_studio.audio_engine.build_voiceover_and_master_audio", "yt_studio.pipeline"],
+      "checkpoint_key": "09_sync"
+    },
+    {
+      "step": 10,
+      "id": "generate_subtitles",
+      "name": "Generate synchronized Hindi subtitles (.srt, .vtt, .ass & HarfBuzz React overlay)",
+      "primary_tools": ["yt_studio.subtitles.generate_subtitles_for_project", "remotion_src/components/SubtitleOverlay.tsx"],
+      "checkpoint_key": "10_subtitles"
+    },
+    {
+      "step": 11,
+      "id": "create_thumbnail",
+      "name": "Create honest, high-contrast 1280x720 & 1920x1080 YouTube thumbnails",
+      "primary_tools": ["yt_studio.graphics.generate_youtube_thumbnail", "remotion_src/components/YouTubeThumbnail.tsx"],
+      "checkpoint_key": "11_thumbnail"
+    },
+    {
+      "step": 12,
+      "id": "prepare_metadata",
+      "name": "Prepare YouTube title, SEO description, chapter timestamps (00:00), and tags",
+      "primary_tools": ["yt_studio.pipeline.write_youtube_metadata"],
+      "checkpoint_key": "12_metadata"
+    },
+    {
+      "step": 13,
+      "id": "render_final_video",
+      "name": "Render final H.264 + AAC MP4 video using YouTube export preset",
+      "primary_tools": ["yt_studio.renderer.render_project_video", "remotion", "ffmpeg"],
+      "checkpoint_key": "13_render"
+    },
+    {
+      "step": 14,
+      "id": "verify_final_video",
+      "name": "Verify container, resolution, FPS, OpenCV frame decoding, -14 LUFS audio, and subtitles",
+      "primary_tools": ["scripts/verify_video.py"],
+      "checkpoint_key": "14_verify"
+    },
+    {
+      "step": 15,
+      "id": "deliver_files_and_report",
+      "name": "Present final deliverables and concise production report",
+      "primary_tools": ["present_file"],
+      "checkpoint_key": "15_delivery"
+    }
+  ],
+  "efficiency_and_recovery_policy": {
+    "check_before_install": true,
+    "setup_bootstrap_script": "scripts/setup_environment.sh",
+    "reuse_cached_segments": true,
+    "checkpoint_filename": "checkpoints.json",
+    "parallel_image_generation": true,
+    "never_restart_whole_project_on_single_step_failure": true,
+    "hindi_typography_engine": "remotion_chromium_harfbuzz"
+  },
+  "state_files": {
+    "system_status": "SYSTEM_STATUS.md",
+    "tool_inventory": "TOOL_INVENTORY.md",
+    "workflow_config": "WORKFLOW_CONFIG.json",
+    "error_log": "ERROR_LOG.md",
+    "channel_preferences": "CHANNEL_PREFERENCES.md"
+  }
+}

@@ -1,0 +1,15 @@
+project_name: template_project
+topic: Mastering Long-Form YouTube Video Automation
+video_title: Mastering Long-Form YouTube Video Automation
+video_subtitle: A Complete Step-by-Step Guide to Mastering Long-Form YouTube Video
+  Automation
+script_file: script.md
+voiceover_file: null
+music_file: null
+visuals_dir: assets/visuals
+preferred_duration_sec: null
+subtitle_language: en
+output_resolution: 1080p
+engine: hybrid
+burn_subtitles: true
+embed_soft_subtitles: true

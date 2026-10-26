@@ -1,0 +1,26 @@
+# Dependencies & virtual environments
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets & local overrides
+.env
+.env.local
+
+# Remotion & intermediate caches
+.remotion/
+.cache/
+renders/
+**/work/
+projects/**/exports/*.mp4
+projects/**/thumbnails/*.png
+
+# OS files
+.DS_Store
+Thumbsumbs.db
