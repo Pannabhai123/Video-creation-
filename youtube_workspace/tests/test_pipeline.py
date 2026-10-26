@@ -23,6 +23,7 @@ sys.path.insert(0, AUTOMATION)
 import captions
 import hinditext
 import imagetovideo
+import livephoto
 import media
 import projector
 import visuals
@@ -238,6 +239,63 @@ def test_loudness_output_keeps_duration_and_rate():
             assert a.codec_context.sample_rate == 48000
             dur = float(c.duration / av.time_base)
             assert abs(dur - 2.0) < 0.15
+
+
+# ---------------------------------------------------------------- neural vision
+def test_models_present():
+    import aivision
+    have = aivision.available()
+    assert have["selfie"], "selfie_segmentation.tflite missing"
+    assert have["selfie_landscape"]
+
+
+def test_person_segmenter_returns_mask():
+    import aivision
+    from PIL import Image
+    seg = aivision.PersonSegmenter()
+    img = Image.open(os.path.join(os.path.dirname(HERE), "images", "src_study_desk.jpg")).resize((640, 360))
+    mask = seg.mask(img)
+    assert mask.shape == (360, 640)
+    assert 0.0 <= float(mask.min()) and float(mask.max()) <= 1.0
+    assert 0.01 < float((mask > 0.5).mean()) < 0.95
+
+
+def test_face_finder_detects_face():
+    import aivision
+    from PIL import Image
+    finder = aivision.FaceFinder()
+    img = Image.open(os.path.join(os.path.dirname(HERE), "images", "src_study_desk.jpg")).resize((640, 360))
+    pts = finder.landmarks(img)
+    assert pts is not None and pts.shape == (468, 2)
+    box = finder.bbox(img)
+    assert box and box[2] > box[0] and box[3] > box[1]
+
+
+def test_layer_motion_modes():
+    for mode in livephoto.MODES:
+        (sfg, dxf, dyf), (sbg, dxb, dyb) = livephoto._layer_motion(mode, 0.5, 0.04, 0.01)
+        assert sfg > 0 and sbg > 0
+        assert abs(sfg - 1.0) < 0.5
+
+
+def test_paste_keeps_transparency():
+    """Regression: pasting without the alpha mask produced a black halo."""
+    from PIL import Image
+    canvas = Image.new("RGB", (100, 100), (10, 120, 200))
+    layer = Image.new("RGBA", (50, 50), (255, 0, 0, 0))
+    livephoto._paste_at(canvas, layer, 0, 0)
+    assert canvas.getpixel((50, 50)) == (10, 120, 200)
+
+
+def test_frames_to_video_pipes_frames():
+    """Regression: a full ffmpeg stderr pipe deadlocked the encoder."""
+    import numpy as np
+    with tempfile.TemporaryDirectory() as d:
+        out = os.path.join(d, "f.mp4")
+        frames = [np.full((72, 128, 3), i * 10, dtype=np.uint8) for i in range(15)]
+        media.frames_to_video(frames, out, fps=15)
+        assert os.path.getsize(out) > 500
+        assert abs(media.probe(out).duration - 1.0) < 0.2
 
 
 def test_requirements_pinned():

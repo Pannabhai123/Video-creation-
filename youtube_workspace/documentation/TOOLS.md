@@ -17,6 +17,9 @@ PY=/home/user/Video-creation-/.venv/bin/python
 | `automation/thumbnail.py` | 1280×720 thumbnails + 168 px mobile check |
 | `automation/music.py` | synthesise royalty-free music beds and SFX |
 | `automation/imagetovideo.py` | still images -> cinematic clips (zoom/pan, transitions, Hindi text) |
+| `automation/livephoto.py` | **neural 2.5D parallax** — subject and background move at different speeds |
+| `automation/aivision.py` | on-device TFLite: person segmentation, 468-point face mesh |
+| `automation/restore_models.py` | re-copy the neural models from the mediapipe wheel |
 | `automation/media.py` | FFmpeg/PyAV layer: probe, encode, mix, loudness, concat, shorts |
 | `automation/captions.py` | script → timed `.srt` + styled `.ass` |
 | `automation/projector.py` | timeline → finished video, plus Shorts cutting |
@@ -135,6 +138,47 @@ Transitions (spec only): `fade`, `smoothleft`, `smoothright`, `circleopen`,
 documentary technique — camera movement over a still — which is what makes a
 photo read as footage.
 
+## livephoto.py — neural depth motion ("living photo")
+
+```bash
+$PY automation/livephoto.py --image images/photo.jpg --out clips/live.mp4 \
+    --mode parallax --duration 6 --size 16:9 \
+    --headline "शीर्षक" --sub "उपशीर्षक" --music reflective --json
+
+$PY automation/livephoto.py --spec projects/<id>/live.json --out rendered_videos/<id>.mp4
+```
+
+Modes: `parallax` (classic depth move), `dolly` (push in on the subject),
+`orbit` (sideways arc), `breathe` (in-and-out).
+Flags: `--strength 0.3..1.0` (motion amplitude), `--inpaint` (content-aware fill of
+the hidden area — only worth it for large moves), `--light-sweep`,
+`--no-depth-blur`, `--size 9:16` for Shorts.
+
+How it works: `aivision.PersonSegmenter` produces a per-pixel person mask with a
+small CNN (5 ms/frame on CPU), the frame is split into subject and background,
+and the two layers are scaled/translated differently per frame. Frames are piped
+straight into FFmpeg with no disk round-trip.
+
+Practical guidance:
+* Keep `--strength` at **0.4–0.6**. Above ~0.8 the strip revealed behind the
+  subject becomes visible and the illusion breaks.
+* Subjects on a plain or dark background work best; busy backgrounds amplify any
+  mask error at the edges.
+* A mask that finds no person is handled gracefully (falls back to whole-frame
+  motion), so non-portrait photos still render.
+
+## aivision.py
+
+```python
+import aivision
+seg = aivision.PersonSegmenter()
+mask = seg.mask(pil_image)          # float32 HxW, person = 1.0
+box  = aivision.FaceFinder().bbox(pil_image)   # (l, t, r, b) or None
+bg   = aivision.inpaint_behind(pil_image, mask, strength=0.95)
+```
+Models live in `assets/models/` (Apache-2.0, from the mediapipe wheel).
+If they go missing: `$PY automation/restore_models.py`.
+
 ## media.py
 
 ```python
@@ -146,6 +190,7 @@ media.still_to_video("frame.png", "clip.mp4", 11.7, motion="zoom_in")
 media.concat_videos([...], "picture.mp4")
 media.mux("picture.mp4", "mix.wav", "final.mp4", subs="hi.ass", burn_subs=True)
 media.make_short_vertical("final.mp4", "short.mp4", 12.0, 60.0)
+media.frames_to_video(frames, "out.mp4", fps=30)   # in-memory RGB frames -> H.264
 media.black_frames("final.mp4")          # QC helper
 ```
 

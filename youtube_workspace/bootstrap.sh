@@ -97,6 +97,13 @@ if [ "${FONT_COUNT:-0}" -lt 4 ]; then
 fi
 say "Fonts      : $FONT_COUNT files"
 
+# ---------------------------------------------------------------- 5b. models
+MODEL_COUNT=$(ls "$WS"/assets/models/*.tflite 2>/dev/null | wc -l | tr -d ' ')
+if [ "${MODEL_COUNT:-0}" -lt 2 ]; then
+  say "Models     : restoring neural models from the mediapipe wheel"
+  "$PY" "$WS/automation/restore_models.py" || say "  ! model restore failed — live-photo modes will be unavailable"
+fi
+
 # ---------------------------------------------------------------- 6. verify
 say ""
 say "────────────────────── environment check ──────────────────────"

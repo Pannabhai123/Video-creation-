@@ -109,6 +109,20 @@ When you have stills instead of a scripted card scene:
    ```
 4. Check it with `qc.py video`, then cut verticals with `--size 9:16 --fit blurpad`.
 
+### When a photo needs real depth
+
+Plain Ken Burns keeps a photo flat. For a subject that should stand out from the
+background, use the neural route:
+
+```bash
+$PY automation/livephoto.py --image projects/<id>/hero.jpg \
+    --out clips/hero_live.mp4 --mode parallax --strength 0.5 --duration 6
+```
+
+Use it for: a person at a desk, a portrait, a single object on a plain surface.
+Do not use it for: landscapes, crowd scenes, busy backgrounds — nothing separates
+cleanly and the effect is wasted.
+
 Rules of thumb: 5–7 seconds per still, never the same motion twice in a row,
 one headline per shot (max ~6 words), and always leave the busiest part of the
 photo free of text.

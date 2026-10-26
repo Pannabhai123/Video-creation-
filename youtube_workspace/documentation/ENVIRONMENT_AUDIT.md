@@ -35,6 +35,7 @@ Whisper/ASR, Chromium/Remotion, yt-dlp, OpenCV, ImageMagick `magick` (v7 syntax)
 | GitHub **release assets** and `raw.githubusercontent.com` | TLS handshake fails (`SSL_ERROR_SYSCALL`) — those hosts are blocked even though `github.com`, `api.github.com` and `codeload.github.com` work. | Downloaded fonts through the **GitHub API** (`gh api repos/.../contents/...`), which returns base64 content. |
 | Hugging Face (`huggingface.co`, `cdn-lfs`) | unreachable (HTTP 000) | **No Whisper** (faster-whisper / ctranslate2 models) and **no Piper TTS** — both need model weights from HF. Alternative transcription path implemented: subtitles are generated from the known script (see §8). |
 | `speech.platform.bing.com` (edge-tts) | TCP connect fails | Installed `edge-tts` to prove the point, but **cloud TTS cannot reach the internet from this sandbox**. Voice-over therefore comes from Arena's built-in speech tool, or your own recording. |
+| AI video generation models (Runway/Kling/Veo/SVD) | No GPU (`nvidia-smi` absent), 3 GB RAM, and model weights live behind blocked hosts | **Solved differently — see §5b:** real neural vision now runs locally via TFLite models that ship inside the MediaPipe wheel. Full generative video is still out, but genuine AI *motion* (subject/background separation, depth parallax, face detection) is in. |
 | Chromium / Playwright download | browser CDN not allowlisted | No HTML/CSS→video route (Remotion). Replaced by a native Pillow+HarfBuzz+FFmpeg renderer, which is far lighter anyway (no 300 MB browser, no Node build step at render time). |
 | Stock music / stock footage APIs | not allowlisted, and licensing is per-channel | Music and SFX are **synthesised locally** from oscillators/noise — original, royalty-free, reproducible. |
 
@@ -49,6 +50,42 @@ that is covered by Arena's own speech tool.
   end-to-end (frames + Ken Burns + music synthesis + subtitles + H.264 encode).
   Practical ceiling on this box is roughly a 12–15 minute 1080p video per run.
 - I/O is the bottleneck, not CPU: keep `generated_assets/` on the same volume.
+
+## 5b. Neural vision installed later (upgrade)
+
+After first reporting that AI motion was impossible here, a working route was
+found — this is worth recording because it changes what the channel can do.
+
+**How:** Hugging Face is blocked, but MediaPipe's **wheel ships trained TFLite
+models inside it**. Those files are Apache-2.0. They were copied into
+`youtube_workspace/assets/models/` and are executed by **LiteRT**
+(`ai-edge-litert`), Google's TFLite runtime, with the XNNPACK CPU delegate.
+
+| Model | Size | What it does | Measured |
+|---|---|---|---|
+| `selfie_segmentation.tflite` | 244 KB | person vs background mask, 256×256 in | **5 ms** per frame |
+| `selfie_segmentation_landscape` | 244 KB | same, tuned for wide frames | 5 ms |
+| `face_landmark.tflite` | 1.2 MB | 468-point face mesh | verified on a portrait |
+| `pose_landmark_full.tflite` | 6.3 MB | 33-point body skeleton | available |
+
+Installed for this: `ai-edge-litert==2.3.0`, `opencv-python-headless==4.11.0.86`
+(headless matters — the default opencv wheel needs `libGL.so.1`, which is absent),
+and `mediapipe==0.10.21` used *only* as a model source (its Python API does not
+import cleanly under numpy 2, so it is never imported at runtime).
+
+**What this enables (implemented in `automation/livephoto.py`):**
+2.5D parallax — the person and the background move at different speeds, which is
+what the eye reads as depth. Modes: `parallax`, `dolly`, `orbit`, `breathe`.
+This is the same idea behind "photo to life" tools, produced entirely on-device.
+
+**What is still impossible:** generating genuinely new frames (a person turning
+their head, a new camera angle). That needs a diffusion/video model and a GPU.
+Anything claiming otherwise would be a lie — the honest ceiling here is
+*neural depth motion on a real photo*, not synthetic footage.
+
+Restore the models any time with `python automation/restore_models.py`, or just
+run `bootstrap.sh` — it detects missing models and re-copies them (verified by
+deleting them and re-running).
 
 ## 5. Installed and verified (this session)
 
@@ -110,19 +147,19 @@ preset, 2 example projects. See `README.md` for the map and `TOOLS.md` for comma
 1. **No in-sandbox speech synthesis.** Hindi voice-over must come from Arena's speech
    tool (I can generate it into `projects/<id>/voiceover/`) or your microphone. The
    pipeline is built to accept either, per scene, and re-times itself to real audio.
-2. **No ASR.** Subtitles come from the script (more accurate for Hindi than small ASR
+3. **No ASR.** Subtitles come from the script (more accurate for Hindi than small ASR
    models anyway). If you record something that differs from the script, regenerate
    the `.srt` from the edited script — do not expect transcription.
-3. **No stock footage.** Scene visuals are typography-led cards with Ken Burns motion
+4. **No stock footage.** Scene visuals are typography-led cards with Ken Burns motion
    plus any stills/photos you provide in `images/`. This is a deliberate documentary
    style that is fully copyright-clean; it is not a B-roll montage.
-4. **No Chrome-based rendering**, so no HTML/CSS brand animations. Motion is limited to
+5. **No Chrome-based rendering**, so no HTML/CSS brand animations. Motion is limited to
    zoom/pan, fades, and text/card composition.
-5. **2 vCPU** → a 15-minute 1080p render takes several minutes; use `--draft` (720p) to
+6. **2 vCPU** → a 15-minute 1080p render takes several minutes; use `--draft` (720p) to
    iterate on structure before the final render.
-6. **No Instagram/TikTok auto-upload, no YouTube API keys** configured — publishing is a
+7. **No Instagram/TikTok auto-upload, no YouTube API keys** configured — publishing is a
    manual upload step with the generated title/description/tags/subtitles/thumbnail pack.
-7. ImageMagick is present but unusable for Hindi (no Pango/HarfBuzz) — do not use it for
+8. ImageMagick is present but unusable for Hindi (no Pango/HarfBuzz) — do not use it for
    text; `hinditext.py` is the supported path.
 
 ## 9. Fastest path to your first real video

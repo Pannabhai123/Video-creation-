@@ -174,9 +174,11 @@ def loudness_normalise(src: str, dst: str, target: dict | None = None, a_bitrate
         deficit = t["I"] - i_now
         if deficit > 0.6 and tp_now > t["TP"] - 0.6:
             tmp2 = dst + ".mk.wav"
-            limiter = 10 ** (t["TP"] / 20.0)
+            # aim slightly below the ceiling: true peak is an inter-sample
+            # measurement and always reads a little above the sample peak
+            limiter = 10 ** ((t["TP"] - 0.6) / 20.0)
             run(["-i", dst,
-                 "-af", f"volume={deficit:.2f}dB,alimiter=limit={limiter:.4f}:attack=5:release=50:level=false",
+                 "-af", f"volume={deficit:.2f}dB,alimiter=limit={limiter:.4f}:attack=3:release=40:level=false",
                  *_audio_codec_for(tmp2, a_bitrate), tmp2], "loudnorm make-up")
             os.replace(tmp2, dst)
             stats["makeup_db"] = round(deficit, 2)
@@ -307,6 +309,45 @@ def still_to_video(image: str, dst: str, duration: float, fps: int = 30,
     run(["-loop", "1", "-i", image, "-t", f"{duration:.3f}", "-r", fps,
          "-vf", vf, "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
          "-pix_fmt", "yuv420p", dst], "still_to_video")
+    return dst
+
+
+def frames_to_video(frames, dst: str, fps: int = 30, crf: str = "18",
+                    preset: str = "medium") -> str:
+    """
+    Encode an in-memory list of RGB numpy frames straight to H.264.
+
+    Frames are piped to FFmpeg over stdin, so nothing touches the disk — this is
+    how the neural live-photo renderer streams its composited output.
+    """
+    import numpy as np
+
+    if len(frames) == 0:
+        raise ValueError("no frames to encode")
+    h, w = frames[0].shape[:2]
+    cmd = [
+        FFMPEG, "-hide_banner", "-nostdin", "-y",
+        "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{w}x{h}", "-r", str(fps), "-i", "-",
+        "-an", "-c:v", "libx264", "-preset", preset, "-crf", crf,
+        "-pix_fmt", "yuv420p", "-movflags", "+faststart", dst,
+    ]
+    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL,
+                            stderr=subprocess.PIPE)
+    try:
+        for frame in frames:
+            arr = np.ascontiguousarray(frame)
+            if arr.dtype != np.uint8:
+                arr = np.clip(arr, 0, 255).astype(np.uint8)
+            if arr.shape[0] != h or arr.shape[1] != w:
+                raise ValueError(f"frame size mismatch: {arr.shape[:2]} vs {(h, w)}")
+            proc.stdin.write(arr.tobytes())
+        proc.stdin.close()
+    except BrokenPipeError:
+        pass
+    err = proc.stderr.read().decode("utf-8", "ignore")
+    proc.wait()
+    if proc.returncode != 0:
+        raise RuntimeError(f"ffmpeg frame encode failed:\n{err[-2500:]}")
     return dst
 
 

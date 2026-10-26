@@ -22,6 +22,12 @@ scipy==1.17.1           # FFT convolution reverb, filtering for music synthesis
 srt==3.5.3              # .srt writing
 pysubs2==1.8.1          # styled .ass for burn-in
 
+# --- neural vision (live-photo / 2.5D parallax) ------------------------
+# LiteRT runs the TFLite models on CPU; mediapipe's wheel is only used to
+# *obtain* the models (its Python API does not import under numpy 2).
+ai-edge-litert==2.3.0
+opencv-python-headless==4.11.0.86   # inpainting + image ops (headless: no libGL needed)
+
 # --- optional / situational -------------------------------------------
 # edge-tts==7.3.1       # installed but unusable here: speech.platform.bing.com is blocked
 #                       # keep for local use where the endpoint is reachable

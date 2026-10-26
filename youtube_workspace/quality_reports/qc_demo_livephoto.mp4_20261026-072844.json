@@ -1,0 +1,104 @@
+[
+  {
+    "file": "/home/user/Video-creation-/youtube_workspace/rendered_videos/demo_livephoto.mp4",
+    "checks": [
+      {
+        "name": "resolution",
+        "value": "1920x1080",
+        "status": "PASS",
+        "expect": "1920x1080 (16:9) or 1080x1920 (9:16)"
+      },
+      {
+        "name": "aspect_ratio",
+        "value": "1.7778",
+        "status": "PASS",
+        "expect": "16:9 or 9:16"
+      },
+      {
+        "name": "frame_rate",
+        "value": 30.0,
+        "status": "PASS",
+        "expect": "integer fps (25/30/60)"
+      },
+      {
+        "name": "duration",
+        "value": "6.00s",
+        "status": "WARN",
+        "expect": "> 20s"
+      },
+      {
+        "name": "video_codec",
+        "value": "h264",
+        "status": "PASS",
+        "expect": "h264 (YouTube-friendly)"
+      },
+      {
+        "name": "audio_stream",
+        "value": "aac",
+        "status": "PASS",
+        "expect": "aac 48 kHz stereo"
+      },
+      {
+        "name": "sample_rate",
+        "value": 48000,
+        "status": "PASS",
+        "expect": "48000 Hz"
+      },
+      {
+        "name": "decode_integrity",
+        "value": "0 errors",
+        "status": "PASS",
+        "expect": "no decode errors"
+      },
+      {
+        "name": "loudness",
+        "value": "-15.38 LUFS",
+        "status": "PASS",
+        "expect": "-14.0 ±1.5 LUFS (YouTube)"
+      },
+      {
+        "name": "true_peak",
+        "value": "-1.72 dBTP",
+        "status": "PASS",
+        "expect": "<= -1.0 dBTP (no clipping)"
+      },
+      {
+        "name": "black_frames",
+        "value": "0 runs (0 long)",
+        "status": "PASS",
+        "expect": "no black run > 1.2s"
+      },
+      {
+        "name": "static_picture",
+        "value": "0 freeze starts > 3s",
+        "status": "PASS",
+        "expect": "visual motion throughout"
+      },
+      {
+        "name": "subtitle_stream",
+        "value": "burned-in only",
+        "status": "PASS",
+        "expect": "burned-in or soft subs"
+      }
+    ],
+    "warnings": [],
+    "errors": [],
+    "info": {
+      "path": "/home/user/Video-creation-/youtube_workspace/rendered_videos/demo_livephoto.mp4",
+      "duration": 6.0,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "v_codec": "h264",
+      "a_codec": "aac",
+      "sample_rate": 48000,
+      "channels": 2,
+      "filesize": 2047418
+    },
+    "loudness": {
+      "integrated_lufs": -15.38,
+      "true_peak_db": -1.72,
+      "lra": 0.5
+    }
+  }
+]

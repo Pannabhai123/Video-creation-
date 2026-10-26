@@ -70,7 +70,8 @@ def check() -> dict:
                     "tools": {}, "dirs": {}, "fonts": {}, "system": {}}
 
     for mod in ("av", "imageio_ffmpeg", "PIL", "uharfbuzz", "freetype", "numpy",
-                "soundfile", "scipy", "srt", "pysubs2", "moviepy", "fontTools"):
+                "soundfile", "scipy", "srt", "pysubs2", "moviepy", "fontTools",
+                "cv2", "ai_edge_litert"):
         ok, v = _python_dep(mod)
         report["tools"][mod] = {"ok": ok, "version": v}
 
@@ -89,6 +90,14 @@ def check() -> dict:
         p = os.path.join(ROOT, "assets", "fonts", f)
         report["fonts"][f] = os.path.exists(p)
 
+    # NEURAL MODELS (live-photo / 2.5D parallax)
+    try:
+        import aivision
+        report["neural"] = {"ok": all(aivision.available().values()),
+                            "models": aivision.available()}
+    except Exception as exc:  # noqa: BLE001
+        report["neural"] = {"ok": False, "models": {}, "detail": f"{type(exc).__name__}: {exc}"}
+
     # Devanagari shaping smoke test
     try:
         sys.path.insert(0, HERE)
@@ -102,7 +111,9 @@ def check() -> dict:
     except Exception as exc:  # noqa: BLE001
         report["shaping"] = {"ok": False, "detail": f"{type(exc).__name__}: {exc}"}
 
-    report["ok"] = (all(v["ok"] for v in report["tools"].values())
+    neural_ok = report.get("neural", {}).get("ok", False)
+    report["ok"] = (neural_ok
+                    and all(v["ok"] for v in report["tools"].values())
                     and all(report["dirs"].values())
                     and all(report["fonts"].values())
                     and report["shaping"]["ok"])
@@ -134,6 +145,9 @@ def human(r: dict) -> str:
     L.append(f"Fonts: {len(r['fonts']) - len(missing_fonts)}/{len(r['fonts'])} present"
              + (f" — missing {missing_fonts}" if missing_fonts else ""))
     L.append(f"Devanagari shaping: {'OK' if r['shaping']['ok'] else 'FAIL'} — {r['shaping']['detail']}")
+    n = r.get("neural", {})
+    mid = [k for k, v in (n.get("models") or {}).items() if v]
+    L.append(f"Neural models: {'OK' if n.get('ok') else 'MISSING'} — {', '.join(mid) or n.get('detail','none')}")
     L.append("")
     L.append("RESULT: " + ("all required components available ✅" if r["ok"] else "problems found ❌"))
     return "\n".join(L)

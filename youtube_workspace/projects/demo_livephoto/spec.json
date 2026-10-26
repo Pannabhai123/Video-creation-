@@ -1,0 +1,10 @@
+{
+  "image": "../../images/src_dawn_road.jpg",
+  "mode": "orbit",
+  "duration": 6,
+  "size": "16:9",
+  "strength": 0.55,
+  "headline": "सुबह का फ़ैसला",
+  "sub": "रोज़ एक कदम",
+  "music": { "mood": "inspiring", "gain_db": -28 }
+}

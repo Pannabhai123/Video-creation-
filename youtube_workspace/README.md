@@ -107,6 +107,21 @@ Motion: zoom in/out, pan, diagonal, parallax, kenburns, static ·
 Transitions: fade, smoothleft, circleopen, wipeleft, dissolve ·
 Sizes: 16:9, 9:16, 1:1, 4:5, custom.
 
+### Neural 2.5D parallax ("living photo")
+
+Yahan **asli AI** chalti hai — MediaPipe ke wheel me aane wale TFLite models
+(Apache-2.0) LiteRT par locally chalte hain, koi cloud/GPU/API key nahi:
+
+```bash
+$PY automation/livephoto.py --image images/photo.jpg --out clips/live.mp4 \
+    --mode parallax --strength 0.5 --headline "शीर्षक"
+```
+
+Person aur background alag speed se move karte hain — yahi depth ka illusion
+banata hai. Modes: `parallax`, `dolly`, `orbit`, `breathe`. Face mesh (468 points)
+bhi available hai. Models `assets/models/` me hain; missing ho to
+`$PY automation/restore_models.py`.
+
 **Note:** ye AI se naya motion "invent" nahi karta (uske liye GPU model chahiye
 jo is sandbox me nahi hai). Ye documentary technique hai — still par camera
 movement — jisse photo footage jaisi lagti hai. Example output:
