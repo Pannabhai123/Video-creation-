@@ -1,0 +1,34 @@
+{
+  "note": "Image-to-video spec. Copy to projects/<id>/spec.json, fix the paths (relative to that file), then run: python automation/imagetovideo.py --spec projects/<id>/spec.json --out rendered_videos/<id>.mp4",
+
+  "size": "16:9",
+  "fps": 30,
+  "fit": "cover",
+
+  "music": { "mood": "reflective", "gain_db": -26 },
+  "transition": { "type": "fade", "duration": 0.8 },
+
+  "shots": [
+    {
+      "image": "../../images/your_photo_1.jpg",
+      "duration": 6.0,
+      "motion": "zoom_in",
+      "headline": "यहाँ मुख्य बात लिखें",
+      "sub": "एक छोटी व्याख्या"
+    },
+    {
+      "image": "../../images/your_photo_2.jpg",
+      "duration": 6.0,
+      "motion": "parallax",
+      "headline": "दूसरा दृश्य",
+      "sub": "जो दिखाना है"
+    },
+    {
+      "image": "../../images/your_photo_3.jpg",
+      "duration": 5.5,
+      "motion": "kenburns",
+      "headline": "तीसरा दृश्य",
+      "sub": "अंत की ओर"
+    }
+  ]
+}

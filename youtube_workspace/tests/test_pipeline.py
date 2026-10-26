@@ -22,6 +22,8 @@ sys.path.insert(0, AUTOMATION)
 
 import captions
 import hinditext
+import imagetovideo
+import media
 import projector
 import visuals
 
@@ -146,12 +148,96 @@ def test_gradient_orientation():
 
 # ---------------------------------------------------------------- misc
 def test_json_templates_parse():
+    """Every shipped template must be valid JSON with real content."""
     tpl = os.path.join(os.path.dirname(HERE), "templates")
-    for name in os.listdir(tpl):
-        if name.endswith(".json"):
-            with open(os.path.join(tpl, name), encoding="utf-8") as fh:
-                data = json.load(fh)
-            assert "scenes" in data and data["scenes"]
+    checked = 0
+    for name in sorted(os.listdir(tpl)):
+        if not name.endswith(".json"):
+            continue
+        with open(os.path.join(tpl, name), encoding="utf-8") as fh:
+            data = json.load(fh)
+        if name.startswith("project."):
+            assert data.get("scenes"), f"{name}: no scenes"
+        elif name.startswith("imagetovideo"):
+            assert data.get("shots"), f"{name}: no shots"
+            for shot in data["shots"]:
+                assert shot.get("image"), f"{name}: shot without image"
+                assert shot.get("motion") in imagetovideo.MOTIONS, f"{name}: bad motion"
+        checked += 1
+    assert checked >= 4, f"expected several templates, found {checked}"
+
+
+# ---------------------------------------------------------------- image -> video
+def test_parse_size_presets():
+    assert imagetovideo.parse_size("16:9") == (1920, 1080)
+    assert imagetovideo.parse_size("9:16") == (1080, 1920)
+    assert imagetovideo.parse_size("1280x720") == (1280, 720)
+    assert imagetovideo.parse_size([800, 600]) == (800, 600)
+
+
+def test_motion_expressions_are_valid():
+    for motion in imagetovideo.MOTIONS:
+        z, x, y = imagetovideo.motion_expr(motion, 5.0, 30, seed=3)
+        assert z and x and y
+        assert "on/" in z + x + y or motion == "static"
+        # no stray placeholders that ffmpeg would reject
+        assert "{" not in z + x + y
+
+
+def test_motion_unknown_raises():
+    try:
+        imagetovideo.motion_expr("wobble", 5.0, 30)
+    except ValueError:
+        return
+    raise AssertionError("expected ValueError for unknown motion")
+
+
+def test_prepare_image_cover_and_blurpad():
+    with tempfile.TemporaryDirectory() as d:
+        src = os.path.join(d, "wide.png")
+        visuals.gradient((1600, 500), "#203040", "#B07020").convert("RGB").save(src)
+        cover = imagetovideo.prepare_image(src, (1080, 1920), fit="cover")
+        assert cover.size == (1080, 1920)
+        pad = imagetovideo.prepare_image(src, (1080, 1920), fit="blurpad")
+        assert pad.size == (1080, 1920)
+
+
+def test_text_overlay_renders_hindi():
+    with tempfile.TemporaryDirectory() as d:
+        p = imagetovideo.text_overlay({"headline": "रात 11 बजे की मेहतान",
+                                       "sub": "नतीजा क्यों नहीं?"},
+                                      (1920, 1080), vertical=False)
+        assert p and os.path.exists(p)
+        from PIL import Image
+        im = Image.open(p)
+        assert im.size == (1920, 1080)
+        assert im.getbbox() is not None
+        os.unlink(p)
+
+
+def test_audio_codec_matches_extension():
+    """Regression: AAC written into a .wav mislabelled the stream and truncated muxed video."""
+    assert "pcm_s16le" in media._audio_codec_for("x.wav")
+    assert "aac" in media._audio_codec_for("x.m4a")
+    assert "48000" in media._audio_codec_for("x.wav")
+
+
+def test_loudness_output_keeps_duration_and_rate():
+    """Regression: normalisation must stay 48 kHz PCM and not change length."""
+    import av
+    with tempfile.TemporaryDirectory() as d:
+        src = os.path.join(d, "tone.wav")
+        media.run(["-f", "lavfi", "-i", "sine=frequency=440:duration=2",
+                   "-ac", "2", "-ar", "48000", "-c:a", "pcm_s16le", src], "tone")
+        out = os.path.join(d, "norm.wav")
+        stats = media.loudness_normalise(src, out)
+        assert stats.get("applied") is True
+        with av.open(out) as c:
+            a = c.streams.audio[0]
+            assert a.codec_context.name == "pcm_s16le"
+            assert a.codec_context.sample_rate == 48000
+            dur = float(c.duration / av.time_base)
+            assert abs(dur - 2.0) < 0.15
 
 
 def test_requirements_pinned():

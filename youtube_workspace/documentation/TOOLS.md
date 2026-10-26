@@ -16,6 +16,7 @@ PY=/home/user/Video-creation-/.venv/bin/python
 | `automation/visuals.py` | 1080p scene frames: title, section, bullets, stat, quote, split, image |
 | `automation/thumbnail.py` | 1280×720 thumbnails + 168 px mobile check |
 | `automation/music.py` | synthesise royalty-free music beds and SFX |
+| `automation/imagetovideo.py` | still images -> cinematic clips (zoom/pan, transitions, Hindi text) |
 | `automation/media.py` | FFmpeg/PyAV layer: probe, encode, mix, loudness, concat, shorts |
 | `automation/captions.py` | script → timed `.srt` + styled `.ass` |
 | `automation/projector.py` | timeline → finished video, plus Shorts cutting |
@@ -105,6 +106,34 @@ $PY automation/music.py all-sfx --dir sound_effects
 Moods: `calm`, `reflective`, `inspiring`, `tense`, `upbeat`. SFX: `whoosh`, `pop`,
 `tick`, `thud`, `riser`, `sweep`. Output is 48 kHz stereo WAV, fades included.
 All synthesised here → no attribution needed, safe to monetise.
+
+## imagetovideo.py — stills to video
+
+```bash
+# one image -> one clip
+$PY automation/imagetovideo.py --image images/photo.jpg --out clips/one.mp4 \
+    --size 16:9 --duration 6 --motion kenburns --music reflective \
+    --headline "शीर्षक" --sub "उपशीर्षक"
+
+# several images, transitions, captions, music -> finished video
+$PY automation/imagetovideo.py --spec projects/<id>/spec.json --out rendered_videos/<id>.mp4 --json
+
+# vertical Short from a landscape photo (whole image kept, blurred sides)
+$PY automation/imagetovideo.py --image images/photo.jpg --out shorts/s1.mp4 \
+    --size 9:16 --fit blurpad --duration 8 --motion zoom_in
+```
+
+Motion values: `zoom_in`, `zoom_out`, `pan_left`, `pan_right`, `diagonal`,
+`parallax`, `kenburns` (random but seeded — same seed, same result), `static`.
+Sizes: `16:9`, `9:16`, `1:1`, `4:5`, or `WxH`. `--fit cover` crops to fill;
+`--fit blurpad` keeps the entire photo and fills the sides with a blurred copy.
+Transitions (spec only): `fade`, `smoothleft`, `smoothright`, `circleopen`,
+`wipeleft`, `dissolve`.
+
+**What it does not do:** it does not invent new motion with an AI video model
+(that needs GPU model weights this sandbox cannot download). It is the
+documentary technique — camera movement over a still — which is what makes a
+photo read as footage.
 
 ## media.py
 

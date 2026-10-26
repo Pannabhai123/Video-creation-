@@ -85,6 +85,33 @@ youtube_workspace/
 Fonts: Noto Sans Devanagari (OFL), Mukta (OFL), Poppins (OFL) — licences in
 `assets/fonts/licenses/`.
 
+## Image → video (photos ban jate hain footage)
+
+```bash
+PY=/home/user/Video-creation-/.venv/bin/python
+
+# ek image se clip
+$PY automation/imagetovideo.py --image images/photo.jpg --out clips/one.mp4 \
+    --duration 6 --motion kenburns --music reflective --headline "शीर्षक"
+
+# kai images + transitions + Hindi captions + music = poori video
+$PY automation/imagetovideo.py --spec projects/demo_imagetovideo/spec.json \
+    --out rendered_videos/demo_imagetovideo.mp4 --json
+
+# 9:16 Short (poori photo bachti hai, kinare blur hote hain)
+$PY automation/imagetovideo.py --image images/photo.jpg --out shorts/s1.mp4 \
+    --size 9:16 --fit blurpad --duration 8
+```
+
+Motion: zoom in/out, pan, diagonal, parallax, kenburns, static ·
+Transitions: fade, smoothleft, circleopen, wipeleft, dissolve ·
+Sizes: 16:9, 9:16, 1:1, 4:5, custom.
+
+**Note:** ye AI se naya motion "invent" nahi karta (uske liye GPU model chahiye
+jo is sandbox me nahi hai). Ye documentary technique hai — still par camera
+movement — jisse photo footage jaisi lagti hai. Example output:
+`rendered_videos/demo_imagetovideo.mp4` (15.9 s, 1080p30, Hindi captions, music).
+
 ## Templates available
 
 | Template | Use |
@@ -101,6 +128,7 @@ Fonts: Noto Sans Devanagari (OFL), Mukta (OFL), Poppins (OFL) — licences in
 | `project.example.json` | working 8-scene long-form project |
 | `project.book_summary.json` | working book-summary project |
 | `project.shorts.json` | working vertical project |
+| `imagetovideo_spec.json` | image-to-video shot list (motion, caption, duration) |
 
 ## Commands you will actually use
 

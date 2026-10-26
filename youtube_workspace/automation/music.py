@@ -222,8 +222,34 @@ SFX = {"whoosh": whoosh, "pop": pop, "tick": tick, "thud": thud,
        "riser": riser, "sweep": transition_sweep}
 
 
-def write_stereo(mono: np.ndarray, dst: str, sr: int = SR, width: float = 0.12) -> str:
-    """Save mono as a subtly widened stereo WAV."""
+def _tame_peaks(x: np.ndarray, drive: float = 2.6) -> np.ndarray:
+    """
+    Reduce crest factor so the bed can reach -14 LUFS without hitting the true-peak
+    ceiling. Sub-bass thumps were eating all the headroom (19 dB crest) even though
+    they contribute almost nothing to perceived loudness.
+    """
+    # strip rumble that only costs headroom
+    x = _highpass(x, 32.0)
+    peak = np.max(np.abs(x)) or 1.0
+    x = x / peak
+    shaped = np.tanh(x * drive) / np.tanh(drive)
+    # leave ~2 dB of peak headroom so later gain staging cannot clip
+    return shaped / (np.max(np.abs(shaped)) or 1.0) * 0.79
+
+
+def _highpass(x: np.ndarray, cutoff: float, sr: int = SR) -> np.ndarray:
+    """Frequency-domain 2nd-order high-pass (cheap, no ringing artefacts worth hearing)."""
+    X = np.fft.rfft(x)
+    freqs = np.fft.rfftfreq(len(x), 1 / sr)
+    roll = 1.0 - 1.0 / (1.0 + (freqs / max(cutoff, 1.0)) ** 4)
+    return np.fft.irfft(X * roll, n=len(x))
+
+
+def write_stereo(mono: np.ndarray, dst: str, sr: int = SR, width: float = 0.12,
+                 tame: bool = True) -> str:
+    """Save mono as a subtly widened stereo WAV (peaks tamed so it sits at -14 LUFS)."""
+    if tame:
+        mono = _tame_peaks(mono)
     if mono.ndim == 2:
         stereo = mono
     else:

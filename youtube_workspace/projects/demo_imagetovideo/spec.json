@@ -1,0 +1,31 @@
+{
+  "note": "Image-to-video example: 3 shots, Hindi text overlays, cinematic motion, music bed. Edit the paths/text and run: python automation/imagetovideo.py --spec projects/demo_imagetovideo/spec.json --out rendered_videos/demo_imagetovideo.mp4",
+  "size": "16:9",
+  "fps": 30,
+  "fit": "cover",
+  "music": { "mood": "reflective", "gain_db": -25 },
+  "transition": { "type": "fade", "duration": 0.8 },
+  "shots": [
+    {
+      "image": "../../images/src_study_desk.jpg",
+      "duration": 6.0,
+      "motion": "zoom_in",
+      "headline": "रात 11 बजे की मेहनत",
+      "sub": "पर नतीजा क्यों नहीं मिलता?"
+    },
+    {
+      "image": "../../images/src_dawn_road.jpg",
+      "duration": 6.0,
+      "motion": "parallax",
+      "headline": "सुबह की शुरुआत",
+      "sub": "एक आदत, जो सब बदल देती है"
+    },
+    {
+      "image": "../../images/src_study_desk.jpg",
+      "duration": 5.5,
+      "motion": "kenburns",
+      "headline": "दो मिनट का नियम",
+      "sub": "बस शुरुआत कीजिए"
+    }
+  ]
+}

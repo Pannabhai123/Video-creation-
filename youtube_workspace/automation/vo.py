@@ -116,13 +116,11 @@ def cmd_normalize(args) -> None:
         if not os.path.exists(src):
             continue
         tmp = src + ".norm.wav"
-        stats = media.loudness_normalise(src, tmp, target={"I": -16.0, "TP": -2.0, "LRA": 7.0},
-                                         a_bitrate="192k")
-        # loudness_normalise writes AAC; re-wrap to PCM for downstream concat
-        media.run(["-i", tmp, "-c:a", "pcm_s16le", src.replace(".wav", ".n.wav")], "rewrap")
-        os.replace(src.replace(".wav", ".n.wav"), src)
-        os.remove(tmp)
-        print(f"  {sc['id']}: {stats.get('input_i', '?')} -> -16 LUFS")
+        stats = media.loudness_normalise(src, tmp, target={"I": -16.0, "TP": -2.0, "LRA": 7.0})
+        # loudness_normalise now emits PCM for a .wav target, so no re-wrap is needed
+        os.replace(tmp, src)
+        print(f"  {sc['id']}: {stats.get('input_i', '?')} -> -16 LUFS "
+              f"({stats.get('output_duration', '?')}s)")
 
 
 def cmd_check(args) -> None:

@@ -94,6 +94,28 @@ Then upload manually: video, `hindi.srt`, thumbnail, title, description, tags,
 chapters, end screen, playlist, and schedule the Shorts from
 `python automation/projector.py shorts ...`.
 
+## Image-to-video (photos as footage)
+
+When you have stills instead of a scripted card scene:
+
+1. Put the images in `youtube_workspace/images/` (AI-generated, your own photos,
+   or properly licensed ones — never a random screenshot).
+2. Copy `templates/imagetovideo_spec.json` to `projects/<id>/spec.json` and fill
+   in `image`, `duration`, `motion`, `headline`, `sub` per shot.
+3. Build:
+   ```bash
+   $PY automation/imagetovideo.py --spec projects/<id>/spec.json \
+       --out rendered_videos/<id>.mp4 --json
+   ```
+4. Check it with `qc.py video`, then cut verticals with `--size 9:16 --fit blurpad`.
+
+Rules of thumb: 5–7 seconds per still, never the same motion twice in a row,
+one headline per shot (max ~6 words), and always leave the busiest part of the
+photo free of text.
+
+These clips can also be dropped into a full project later — render them to mp4
+and reference the file from a scene, or keep image-led videos as their own format.
+
 ## Naming conventions
 
 | Thing | Pattern | Example |

@@ -129,10 +129,29 @@ def concat_audio(paths: Sequence[str], dst: str, sample_rate: int = 48000) -> st
     return dst
 
 
+def _audio_codec_for(dst: str, a_bitrate: str = "192k") -> list[str]:
+    """
+    Pick an encoder that matches the output extension.
+
+    Writing AAC into a .wav filename produces a mislabelled ADTS stream that can
+    also resample to 96 kHz; downstream muxing then misreads its duration. So:
+    .wav/.flac/.aiff stay uncompressed, everything else becomes AAC at 48 kHz.
+    """
+    ext = os.path.splitext(dst)[1].lower()
+    if ext == ".wav":
+        return ["-c:a", "pcm_s16le", "-ar", "48000"]
+    if ext == ".flac":
+        return ["-c:a", "flac", "-ar", "48000"]
+    if ext in (".m4a", ".mp4", ".aac"):
+        return ["-c:a", "aac", "-b:a", a_bitrate, "-ar", "48000"]
+    return ["-c:a", "aac", "-b:a", a_bitrate, "-ar", "48000"]
+
+
 def loudness_normalise(src: str, dst: str, target: dict | None = None, a_bitrate: str = "192k") -> dict:
-    """Two-pass EBU R128 normalisation to YouTube-friendly -14 LUFS."""
+    """Two-pass EBU R128 normalisation to YouTube-friendly -14 LUFS (48 kHz output)."""
     t = target or LOUDNESS_TARGET
-    base = ["-i", src, "-af", f"loudnorm=I={t['I']}:TP={t['TP']}:LRA={t['LRA']}:print_format=json", "-f", "null", "-"]
+    base = ["-i", src, "-af", f"loudnorm=I={t['I']}:TP={t['TP']}:LRA={t['LRA']}:print_format=json",
+            "-f", "null", "-"]
     err = run(base, "loudnorm measure")
     stats = _last_json(err)
     if stats:
@@ -140,10 +159,31 @@ def loudness_normalise(src: str, dst: str, target: dict | None = None, a_bitrate
             f"loudnorm=I={t['I']}:TP={t['TP']}:LRA={t['LRA']}:"
             f"measured_I={stats['input_i']}:measured_TP={stats['input_tp']}:"
             f"measured_LRA={stats['input_lra']}:measured_thresh={stats['input_thresh']}:"
-            f"offset={stats['target_offset']}:linear=true"
+            f"offset={stats['target_offset']}:linear=true,"
+            f"aresample=48000,aformat=sample_fmts=s16:channel_layouts=stereo"
         )
-        run(["-i", src, "-af", af, "-c:a", "aac", "-b:a", a_bitrate, dst], "loudnorm apply")
+        run(["-i", src, "-af", af, *_audio_codec_for(dst, a_bitrate), dst], "loudnorm apply")
         stats["applied"] = True
+
+        # loudnorm lowers its gain when the true-peak ceiling would be exceeded,
+        # which can leave music-led content a few dB under target. Recover it with
+        # a limited make-up pass so the file actually lands at -14 LUFS.
+        got = measure_loudness(dst)
+        i_now = float(got.get("input_i", 0) or 0)
+        tp_now = float(got.get("input_tp", -99) or -99)
+        deficit = t["I"] - i_now
+        if deficit > 0.6 and tp_now > t["TP"] - 0.6:
+            tmp2 = dst + ".mk.wav"
+            limiter = 10 ** (t["TP"] / 20.0)
+            run(["-i", dst,
+                 "-af", f"volume={deficit:.2f}dB,alimiter=limit={limiter:.4f}:attack=5:release=50:level=false",
+                 *_audio_codec_for(tmp2, a_bitrate), tmp2], "loudnorm make-up")
+            os.replace(tmp2, dst)
+            stats["makeup_db"] = round(deficit, 2)
+
+        stats["output_duration"] = round(duration_of(dst), 3)
+        stats["source_duration"] = round(duration_of(src), 3)
+        stats["achieved_lufs"] = float(measure_loudness(dst).get("input_i", 0) or 0)
     else:
         shutil.copyfile(src, dst)
         stats = {"applied": False}
@@ -193,9 +233,16 @@ def mix(narration: str | None, music: str | None, dst: str,
     if music:
         idx = len(inputs) // 2
         inputs += ["-stream_loop", "-1", "-i", music]
+        # music_gain_db is a *relative* offset from the program level, not an absolute
+        # gain. Measure the bed and place it accordingly, otherwise a quiet bed plus
+        # a large negative gain lands the whole programme 40 dB too low and loudness
+        # normalisation has to fight a lost cause.
+        bed_lufs = float(measure_loudness(music).get("input_i", -20.0))
+        program_ref = -16.0 if narration else -15.0
+        delta = round(program_ref + music_gain_db - bed_lufs, 2)
         filters.append(
             f"[{idx}:a]aresample={sample_rate},aformat=channel_layouts=stereo,"
-            f"volume={music_gain_db}dB[bgm]"
+            f"volume={delta}dB,alimiter=limit=0.9:level=false[bgm]"
         )
         labels.append("bgm")
 
@@ -298,7 +345,15 @@ def mux(video: str, audio: str | None, dst: str, subs: str | None = None,
             args += ["-map", "0:v:0", "-map", "1:a:0", "-map", "2:s:0"]
         else:
             args += ["-map", "0:v:0", "-map", "1:a:0"]
-        args += ["-c:v", "copy", "-c:a", "aac", "-b:a", a_bitrate,
+        # Guard: if the audio is shorter than the picture, pad it rather than let
+        # -shortest cut the video. A silent tail is a visible defect; a truncated
+        # video is a lost video.
+        v_dur = duration_of(video)
+        a_dur = duration_of(audio) if audio else v_dur
+        if a_dur + 0.05 < v_dur:
+            args = [a for a in args]
+            args += ["-af", f"apad,atrim=0:{v_dur:.3f}"]
+        args += ["-c:v", "copy", "-c:a", "aac", "-b:a", a_bitrate, "-ar", "48000",
                  "-movflags", "+faststart", "-shortest", dst]
     run(args, "mux")
     return dst
