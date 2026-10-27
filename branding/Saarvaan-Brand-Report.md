@@ -500,3 +500,88 @@ Alternative stylization for logo only: `SAARVAAN` (all caps, tracking +40)
 ---
 
 *Report prepared for Ronny · 26 October 2026 · सभी handle checks live verified, trademark और social checks NOT verified.*
+
+---
+---
+
+# PART 2 — 5 और India-Focused Name Options (Requested)
+**दोबारा verify किया गया: 26 October 2026**
+
+नीचे 5 नए नाम हैं जो Part 1 में नहीं थे। हर एक का YouTube handle सीधे open करके check किया गया (404 = free, channel page = taken), और फिर exact नाम पर web search करके brand collision देखा गया।
+
+## नए Handle Checks (live)
+
+| Handle | Result | जो मिला |
+|---|---|---|
+| `@mananvaan` | ✅ **FREE** (404) | — |
+| `@chintanvaan` | ✅ **FREE** (404) | — |
+| `@pustakvaan` | ✅ **FREE** (404) | — |
+| `@sochshala` | ✅ **FREE** (404) | — |
+| `@saarsangrah` | ✅ **FREE** (404) | — |
+| `@saarvritti` | ✅ **FREE** (404) | — |
+| `@saarbodh` | ❌ TAKEN | "SaarBodh" (खाली channel) |
+| `@bodhpath` | ❌ TAKEN | "Bodh Path" (खाली channel) |
+| `@gyaanvaan` | ❌ TAKEN | "Gyaanvaan" (खाली channel) |
+| `@saardrishti` | ❌ TAKEN | "Sachin Yadav" |
+| `@saarshala` | ❌ TAKEN | "Saarshala" (खाली channel) |
+| `@vicharak` | ❌ TAKEN | "Vicharak V" |
+
+## 5 Final Options (score 100 में)
+
+| # | Name | Meaning | Score | Handle | Brand Conflict |
+|---|---|---|---|---|---|
+| 1 | **MANANVAAN** | मनन + वान = "जो पढ़कर मनन/चिंतन करे" — deep reflection | **92** | ✅ `@mananvaan` free | ✅ कोई नहीं |
+| 2 | **CHINTANVAAN** | चिंतन + वान = "चिंतन करने वाला" | **83** | ✅ `@chintanvaan` free | ✅ कोई नहीं |
+| 3 | **SOCHSHALA** | सोच + शाला = "सोच की पाठशाला" | **81** | ✅ `@sochshala` free | ⚠️ `sochshala.com` मौजूद (personal blog) |
+| 4 | **PUSTAKVAAN** | पुस्तक + वान = "किताबों वाला" | **79** | ✅ `@pustakvaan` free | ✅ कोई नहीं |
+| 5 | **SAARVRITTI** | सार + वृत्ति = "सार की प्रवृत्ति" | **72** | ✅ `@saarvritti` free | ✅ कोई नहीं |
+
+**अस्वीकार किया:** **Saarsangrah** — handle free था, लेकिन "Saar Sangrah" नाम से Mahesh Barnwal की जानी-मानी exam-notes app/किताब है (Doon Edutech), साथ में "Ayurved Saarsangrah" पुस्तकें भी। Exam preparation से जुड़ा नाम होने से आपकी book-summary positioning को नुकसान होता। इसलिए टाल दिया।
+
+---
+
+## 🥇 सबसे अच्छा नया विकल्प — MANANVAAN (मननवान)
+
+**Pronunciation:** म-नन-वान (ma-NAN-vaan) · 3 syllables
+**Meaning:** "मनन" = किसी बात को पढ़कर/सुनकर उस पर गहराई से सोचना, पचाना। "मननवान" = वह जो पढ़ी हुई बात पर मनन करे।
+
+**यह क्यों सबसे अच्छा है:**
+1. **Meaning सबसे सटीक** — book summary का असली मक़सद "मनन" ही है: किताब पढ़ना नहीं, उस पर सोचना। यह नाम आपके काम के दूसरे कदम को पकड़ता है — जो हर दूसरे channel से अलग है।
+2. **कोई conflict नहीं** — handle free, और web search में कोई education brand/channel नहीं मिला (सिर्फ़ Tamil गाना "Mannavane" है, जो अलग शब्द है)।
+3. **Hindi audience के लिए सहज** — "मनन" शब्द पढ़े-लिखे Indian audience (students, competitive exam वाले) को पहले से पता है। आपको नया शब्द सिखाना नहीं पड़ेगा।
+4. **Premium tone** — "वान" suffix से सम्मानजनक, गंभीर, intellectual feel आता है। Motivation channels के शोर से अलग।
+
+**कमज़ोरी (honest):** 9 letters, 3 syllables — "Saarvaan" से थोड़ा लंबा। और "मनन" एक शांत/आध्यात्मिक शब्द है, इसलिए energy कम और depth ज़्यादा लगती है — अगर आप aggressive motivation वाली thumbnail चाहते हैं तो यह नाम थोड़ा soft लगेगा।
+
+## 🥈 CHINTANVAAN — 83
+**फ़ायदा:** "चिंतन" भी मनन जैसा ही, intellectual, handle free, कोई conflict नहीं।
+**कमी:** 11 letters — सबसे लंबा। Type करने में भारी, और "Chintan" एक आम Indian first name भी है, इसलिए search में personal profiles के बीच खो सकता है।
+
+## 🥉 SOCHSHALA — 81
+**फ़ायदा:** सबसे friendly और Hinglish — "सोच की पाठशाला"। Students को तुरंत समझ आता है, युवा audience से connect करता है। Handle free।
+**कमी:** `sochshala.com` पहले से किसी के personal blog पर है → **possible conflict**। इसके अलावा "Soch" root Hindi YouTube में बहुत भरा हुआ है (SochSutra, Sochvaan, SochBihar आदि), इसलिए distinctiveness कम।
+
+## PUSTAKVAAN — 79
+**फ़ायदा:** सीधा "किताब" से जुड़ा, handle free, कोई conflict नहीं। Book-summary niche में meaning 100% clear।
+**कमी:** "पुस्तकवान" शब्द लोगों ने सुना नहीं है — थोड़ा awkward लगता है ("किताबों वाला" जैसा)। इसके अलावा यह सिर्फ़ किताबों तक सीमित करता है, psychology/mindset वाले broad content के लिए कमज़ोर।
+
+## SAARVRITTI — 72
+**फ़ायदा:** handle free, दुर्लभ, intellectual।
+**कमी:** "वृत्ति" तकनीकी शब्द है (psychology में tendency)। आम audience को समझ नहीं आएगा, बोलने में भी भारी। Recommend नहीं करता।
+
+---
+
+## 🔎 इन 5 में से क्या चुनें?
+
+| अगर आपकी प्राथमिकता है | तो चुनें |
+|---|---|
+| Book summaries + गहराई + premium | **Mananvaan** 🥇 |
+| हल्का, युवा, friendly Hinglish | Sochshala (पर domain conflict देख लें) |
+| सिर्फ़ किताबों पर केंद्रित | Pustakvaan |
+| शुद्ध intellectual, लंबाई चलेगी | Chintanvaan |
+
+**मेरी राय अभी भी वही है:** असली ranking में **Saarvaan (93)** अभी भी सबसे ऊपर है — क्योंकि "सार" शब्द आपके काम का *पहला* कदम (किताब का निचोड़) है, जो audience की search से सीधे जुड़ता है, और यह 2 syllable में सबसे छोटा + सबसे premium है।
+
+**लेकिन अगर आपको "Saarvaan" थोड़ा generic लग रहा है और आप चाहते हैं कि नाम आपकी *thinking-depth* दिखाए — तो Mananvaan बेहतरीन विकल्प है।** इसका handle भी free है और कोई channel conflict नहीं।
+
+> ⚠️ ध्यान दें: इन 5 नामों के लिए भी trademark और Instagram handles **verify नहीं हुए**। handle free है — यह मैंने आज check किया; trademark safe है — यह मैंने नहीं।
