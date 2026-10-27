@@ -11,6 +11,12 @@ Permanent production workspace for an Education channel covering book summaries,
 | [`branding/brand-identity.html`](branding/brand-identity.html) | Visual identity guide — palette, logo, banner, thumbnails, intro/outro |
 | [`videos/`](videos/) | One folder per video project (14 numbered deliverables, per workflow §15) |
 
+## Video projects
+
+| Project | Status |
+|---|---|
+| [`videos/VIDEO_01_COMPARISON/`](videos/VIDEO_01_COMPARISON/) | **Production-ready (3 items pending)** — Comparison की असली Psychology · 19 min · Hindi/Hinglish |
+
 ## Channel brand (working)
 
 **Mantha / मंथा** — `@mantha` verified free on 26 Oct 2026.
