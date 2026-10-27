@@ -1,27 +1,22 @@
-# YouTube Channel Branding — Saarvaan (सारवान)
+# Ronny's YouTube Creator Workspace
 
-Brand name research and identity system for an Education channel covering book summaries, self-improvement, psychology and personal development in Hindi & Hinglish.
+Permanent production workspace for an Education channel covering book summaries, self-improvement, psychology and personal development in Hindi & Hinglish.
 
-## Deliverables
+## Start here
 
-| File | What it is |
+| File | Purpose |
 |---|---|
-| [`branding/Saarvaan-Brand-Report.md`](branding/Saarvaan-Brand-Report.md) | Full research report — 35 name candidates, live handle verification log, scoring, top 10 shortlist, final recommendation, complete brand identity copy (descriptions, SEO keywords, taglines) |
-| [`branding/brand-identity.html`](branding/brand-identity.html) | Visual brand guidelines — colour palette, logo concept, banner layout, thumbnail system, intro/outro storyboard, typography, do & don't rules |
+| [`MASTER_WORKFLOW.md`](MASTER_WORKFLOW.md) | **Permanent instructions.** Research → script → visuals → audio → editing → SEO → copyright review. Read before every video. |
+| [`branding/Saarvaan-Brand-Report.md`](branding/Saarvaan-Brand-Report.md) | Name research, live YouTube handle verification log, scoring, shortlist |
+| [`branding/brand-identity.html`](branding/brand-identity.html) | Visual identity guide — palette, logo, banner, thumbnails, intro/outro |
+| [`videos/`](videos/) | One folder per video project (14 numbered deliverables, per workflow §15) |
 
-## Recommendation
+## Channel brand (working)
 
-**Saarvaan (सारवान)** — "one who carries the essence."
-Handle `@saarvaan` was **verified free** on 26 Oct 2026.
+**Mantha / मंथा** — `@mantha` verified free on 26 Oct 2026.
+Tagline: *किताब का मंथन, ज़िंदगी का अमृत।*
+Shortlist also open: Manan (`@manan`), Sochna (`@sochna`) — all handles verified free.
 
-Tagline: **किताबों का सार, ज़िंदगी में बदलाव।**
+## Standing rules
 
-## Verification status
-
-- ✅ YouTube handle availability — live checked per handle (404 = free, channel page = taken)
-- ✅ Existing channel / brand name conflicts — checked via web search
-- ❌ Instagram / X handles — blocked (HTTP 403), not verified
-- ❌ Trademark (IP India / USPTO) — databases unreachable, not verified
-- ❌ Domain availability — not verified
-
-Run a Class 41 (education) trademark search and claim the handle before launch.
+Originality over speed · verify or label unverified · never fabricate sources or claims · never promise views or monetization · never claim an action that didn't happen.
