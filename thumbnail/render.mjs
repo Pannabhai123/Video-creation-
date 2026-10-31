@@ -297,8 +297,34 @@ async function main() {
       <path d="M0 -11 L${len - 46} -11 L${len - 46} -30 L${len} 0 L${len - 46} 30 L${len - 46} 11 L0 11 Z" fill="#E8231A" stroke="#fff" stroke-width="5" stroke-linejoin="round"/></g>`);
   }
 
-  // ---- KitaabDeep watermark (bottom-left, small gold)
-  if (brand) {
+  // ---- KitaabDeep watermark (bottom-left)
+  // "logo" style = real channel logo (emblem + gold wordmark cut from thumbnail/brand/kitaabdeep-logo.png)
+  // "text" style = flame icon + "KitaabDeep" typed in gold Poppins
+  const BRAND_DIR = path.join(ROOT, 'thumbnail', 'brand');
+  const hasLogo = fs.existsSync(path.join(BRAND_DIR, 'emblem.png')) && fs.existsSync(path.join(BRAND_DIR, 'wordmark.png'));
+  const brandStyle = cfg.brand_style || (hasLogo ? 'logo' : 'text');
+  if (brand && brandStyle === 'logo') {
+    const img = async f => {
+      const b = path.join(BRAND_DIR, f);
+      const m = await sharp(b).metadata();
+      return { uri: `data:image/png;base64,${fs.readFileSync(b).toString('base64')}`, ar: m.width / m.height };
+    };
+    const em = await img('emblem.png'), wm = await img('wordmark.png');
+    const bh = cfg.brand_size ? cfg.brand_size * 2.1 : 64;          // pill height
+    const eh = bh * 0.86, ew = eh * em.ar;                           // emblem
+    const wh = bh * 0.44, ww = wh * wm.ar;                           // wordmark
+    const pad = bh * 0.2;
+    const bw = pad + ew + pad * 0.5 + ww + pad * 1.3;
+    const bx = cfg.brand_x ?? 30, by = cfg.brand_y ?? (H - bh - 26);
+    defs.push(gradientDef('brandGold', FILLS.gold));
+    defs.push(`<filter id="logoGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>`);
+    layers.push(`<g>
+      <rect x="${bx}" y="${by}" width="${bw.toFixed(1)}" height="${bh}" rx="${bh / 2}" fill="#060b1c" fill-opacity="0.78" stroke="url(#brandGold)" stroke-width="2.5"/>
+      <image href="${em.uri}" x="${(bx + pad).toFixed(1)}" y="${(by + (bh - eh) / 2).toFixed(1)}" width="${ew.toFixed(1)}" height="${eh.toFixed(1)}" filter="url(#logoGlow)" opacity="0.6"/>
+      <image href="${em.uri}" x="${(bx + pad).toFixed(1)}" y="${(by + (bh - eh) / 2).toFixed(1)}" width="${ew.toFixed(1)}" height="${eh.toFixed(1)}"/>
+      <image href="${wm.uri}" x="${(bx + pad * 1.5 + ew).toFixed(1)}" y="${(by + (bh - wh) / 2 + wh * 0.08).toFixed(1)}" width="${ww.toFixed(1)}" height="${wh.toFixed(1)}"/>
+    </g>`);
+  } else if (brand) {
     const bs = cfg.brand_size ?? 30;
     const bm = shape(brand, hindiFam, ENGLISH_FONTS['poppins-extrabold']);
     const tw = bm.w * bs, th = bs * 1.0;

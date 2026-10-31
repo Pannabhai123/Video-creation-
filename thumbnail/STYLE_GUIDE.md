@@ -43,7 +43,7 @@ Har naye topic ka thumbnail isi formula se banega.
 │  Line 2  – white                      │  / tree               │
 │  Line 3  – GOLD #F5A623 / #FFD700     │                       │
 │           (main hook, biggest, glow)  │                       │
-│  [🔥 KitaabDeep]  ← bottom-left        │        (keep clear) ▢ │
+│  [📖🔥 KitaabDeep logo] ← bottom-left  │        (keep clear) ▢ │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -55,7 +55,7 @@ Har naye topic ka thumbnail isi formula se banega.
 | Main hook word | Deep Gold `#F5A623` / Bright Yellow `#FFD700` (gradient) |
 | Supporting text | White `#FFFFFF` |
 | Readability | Black outline (≈8.5% of font size) + blurred black drop shadow + left-side black gradient |
-| Watermark | Bottom-left pill: flame icon + "KitaabDeep" in small gold Poppins ExtraBold |
+| Watermark | Bottom-left dark-navy pill with gold border: **official KitaabDeep logo** (book + flame emblem + gold wordmark), auto-cut from `thumbnail/brand/kitaabdeep-logo.png`. `"brand_style": "text"` = flame icon + typed text fallback |
 
 ---
 
@@ -111,3 +111,7 @@ Glow colour ideas: **gold** (habits, success, money), **neon green** (discipline
 Per-line options: `color` (gold · yellow · white · cyan · green · orange · red · or any hex),
 `scale` (fraction of zone width, default 1), `max_size` (px), `glow`, `extrude` (3D depth, e.g. 0.05),
 `underline`, `ring`, `band` (highlight box colour), `align` (left · center · right), `stroke`.
+
+### Logo update
+Naya logo aaye to `thumbnail/brand/kitaabdeep-logo.png` replace karo aur chalao:
+`node thumbnail/tools/make_logo_assets.mjs` → `emblem.png` + `wordmark.png` (transparent) ban jayenge.
