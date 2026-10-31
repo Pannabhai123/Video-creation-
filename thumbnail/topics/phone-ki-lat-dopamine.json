@@ -1,0 +1,16 @@
+{
+  "background": "../assets/phone-ki-lat-dopamine.jpg",
+  "output": "../../output/phone-ki-lat-dopamine.jpg",
+  "layout": "text-left",
+  "hindi_font": "noto-black",
+  "english_font": "poppins-black",
+  "text_area": { "x": 40, "y": 55, "w": 640, "h": 545 },
+  "line_gap": 0.13,
+  "lines": [
+    { "text": "आपका दिमाग", "color": "white", "scale": 0.9 },
+    { "text": "HACK", "color": "gold", "scale": 0.95, "glow": "#FF2A2A", "extrude": 0.05, "extrude_color": "#5a0b00" },
+    { "text": "हो रहा है!", "color": "white", "scale": 0.86 }
+  ],
+  "arrow": { "x": 660, "y": 330, "len": 110, "angle": -8 },
+  "brand": "KitaabDeep"
+}
