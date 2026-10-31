@@ -1,0 +1,25 @@
+{
+  "name": "kitaabdeep-video-creation",
+  "version": "1.0.0",
+  "description": "KitaabDeep – Hindi book-summary YouTube thumbnail generator",
+  "scripts": {
+    "thumbnail": "node thumbnail/render.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pannabhai123/Video-creation-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pannabhai123/Video-creation-/issues"
+  },
+  "homepage": "https://github.com/Pannabhai123/Video-creation-#readme",
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "harfbuzzjs": "^1.6.4",
+    "sharp": "^0.35.5"
+  },
+  "private": true
+}

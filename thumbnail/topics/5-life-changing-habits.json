@@ -1,0 +1,15 @@
+{
+  "background": "../assets/5-life-changing-habits.jpg",
+  "output": "../../output/5-life-changing-habits.jpg",
+  "layout": "text-left",
+  "hindi_font": "noto-black",
+  "english_font": "poppins-black",
+  "text_area": { "x": 40, "y": 60, "w": 660, "h": 540 },
+  "line_gap": 0.16,
+  "lines": [
+    { "text": "जीवन बदलने", "color": "white", "scale": 0.94 },
+    { "text": "वाली", "color": "white", "max_size": 150 },
+    { "text": "5 आदतें", "color": "gold", "scale": 1.0, "glow": "gold", "extrude": 0.05, "underline": "gold" }
+  ],
+  "brand": "KitaabDeep"
+}
